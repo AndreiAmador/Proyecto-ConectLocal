@@ -16,3 +16,5 @@
 
 <a href="/profile/edit">Editar perfil</a>
 <a href="/auth/logout">Cerrar sesión</a>
+<!-- En cualquier parte de tu profile.php -->
+<p><a href="/jobs">Ver y gestionar mi currículum (trabajos realizados)</a></p>
