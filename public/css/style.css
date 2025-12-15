@@ -125,6 +125,15 @@ body::before {
     color: white;
 }
 
+.btn {
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 0 18px rgba(96, 165, 250, 0.7);
+    transform: translateY(-1px);
+}
+
 
 /*---------------------------------------TABLA--------------------------------------------*/
 
@@ -227,4 +236,36 @@ body::before {
     .content {
         padding: 30px 20px;
     }
+}
+
+/*---------------------------------------resaltar_texto--------------------------------------------*/
+.content h1,
+.content h2,
+.content h3,
+.content p,
+.content label {
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.content h1:hover,
+.content h2:hover,
+.content h3:hover {
+    color: #93c5fd;
+    text-shadow: 0 0 8px rgba(147, 197, 253, 0.8);
+}
+
+.content p:hover,
+.content label:hover {
+    color: #e0f2fe;
+    text-shadow: 0 0 4px rgba(147, 197, 253, 0.5);
+}
+
+/*---------------------------------------resaltar_texto_encabezado--------------------------------------------*/
+.header .nav a {
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.header .nav a:hover {
+    color: #bfdbfe;
+    text-shadow: 0 0 6px rgba(191, 219, 254, 0.9);
 }
