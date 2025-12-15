@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<canvas id="stars"></canvas>
+
 <header class="header">
     <div class="container header-content">
         <h1 class="logo">ConectLocal</h1>
@@ -29,6 +31,8 @@
 
 <!-- JS global -->
 <script src="<?= base_url('js/mouse-trail.js') ?>"></script>
+
+<script src="<?= base_url('js/stars.js') ?>"></script>
 
 </body>
 </html>
