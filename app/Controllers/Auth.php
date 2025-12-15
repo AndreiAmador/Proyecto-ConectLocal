@@ -2,63 +2,43 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
+use App\Models\UserModel;  // Asegúrate de importar correctamente el modelo
 use CodeIgniter\Controller;
 
 class Auth extends Controller
 {
-    public function login()
-    {
-        return view('login');
-    }
-
+    // Mostrar formulario de registro
     public function register()
     {
-        return view('register');
+        return view('register');  // Carga la vista 'register.php'
     }
 
-    public function loginPost()
-    {
-        $username = $this->request->getPost('username');
-        $password = $this->request->getPost('password');
-
-        $model = new UserModel();
-        $user = $model->getUserByUsername($username);
-
-        if ($user && password_verify($password, $user['password'])) {
-            // Usuario autenticado correctamente
-            session()->set('loggedIn', true);
-            session()->set('username', $user['username']);
-            return redirect()->to('/dashboard');  // Redirige al dashboard o área protegida
-        } else {
-            // Error en el inicio de sesión
-            return redirect()->to('/auth/login')->with('error', 'Credenciales incorrectas');
-        }
-    }
-
+    // Procesar el registro de un usuario (POST)
     public function registerPost()
     {
+        // Obtener los datos del formulario
         $username = $this->request->getPost('username');
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
         $confirmPassword = $this->request->getPost('confirm_password');
 
+        // Validar que las contraseñas coincidan
         if ($password !== $confirmPassword) {
             return redirect()->to('/auth/register')->with('error', 'Las contraseñas no coinciden');
         }
 
-        $model = new UserModel();
+        $model = new UserModel();  // Crear una instancia del modelo
 
-        // Verifica si el usuario ya existe
+        // Verificar si el nombre de usuario ya está registrado
         if ($model->getUserByUsername($username)) {
             return redirect()->to('/auth/register')->with('error', 'El nombre de usuario ya está registrado');
         }
 
-        // Crea el nuevo usuario
+        // Registrar al nuevo usuario (guardar en la base de datos)
         $model->save([
             'username' => $username,
             'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'password' => password_hash($password, PASSWORD_DEFAULT),  // Encriptar la contraseña
         ]);
 
         return redirect()->to('/auth/login')->with('success', 'Registro exitoso, ahora puedes iniciar sesión');
