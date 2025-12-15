@@ -1,3 +1,9 @@
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('error'); ?>
+    </div>
+<?php endif; ?>
+
 <form action="/auth/loginPost" method="post">
     <div>
         <label for="username">Usuario</label>
@@ -9,3 +15,5 @@
     </div>
     <button type="submit">Iniciar sesión</button>
 </form>
+
+<p>¿No tienes una cuenta? <a href="/auth/register">Regístrate aquí</a></p>
