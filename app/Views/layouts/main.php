@@ -2,28 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title><?= esc($title ?? 'Mi Proyecto') ?></title>
+    <title><?= esc($title ?? 'ConectLocal') ?></title>
 
     <!-- CSS global -->
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 <body>
 
-    <header class="header">
-        <h1>Mi Proyecto</h1>
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="#">Login</a>
+<header class="header">
+    <div class="container header-content">
+        <h1 class="logo">ConectLocal</h1>
+        <nav class="nav">
+            <a href="/">Inicio</a>
+            <a href="/login">Login</a>
         </nav>
-    </header>
+    </div>
+</header>
 
-    <main class="content">
-        <?= $this->renderSection('content') ?>
-    </main>
+<main class="container content">
+    <?= $this->renderSection('content') ?>
+</main>
 
-    <footer class="footer">
-        <p>© 2025</p>
-    </footer>
+<footer class="footer">
+    <p>© 2025 ConectLocal · Proyecto escolar</p>
+</footer>
+
+<!-- JS global -->
+<script src="<?= base_url('js/mouse-trail.js') ?>"></script>
 
 </body>
 </html>
