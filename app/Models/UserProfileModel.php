@@ -6,20 +6,24 @@ use CodeIgniter\Model;
 
 class UserProfileModel extends Model
 {
-    protected $table      = 'user_profiles';   // Nombre de la tabla
-    protected $primaryKey = 'id';              // Clave primaria
-    protected $allowedFields = ['user_id', 'bio', 'phone', 'social_link', 'photo']; // Campos permitidos
+    protected $table = 'user_profiles';
+    protected $primaryKey = 'id';
+    protected $allowedFields = ['user_id', 'bio', 'phone', 'social_link', 'photo'];
 
-    // Método para obtener el perfil por ID de usuario
     public function getProfileByUserId($userId)
     {
-        return $this->where('user_id', $userId)->first();  // Devuelve el perfil del usuario por ID
+        return $this->where('user_id', $userId)->first();
     }
 
-    // Método para guardar o actualizar el perfil del usuario
     public function saveProfile($userId, $data)
     {
-        $data['user_id'] = $userId;  // Establecer el ID del usuario en los datos
-        return $this->save($data);  // Guardar el perfil en la base de datos
+        $existing = $this->where('user_id', $userId)->first();
+        
+        if ($existing) {
+            return $this->update($existing['id'], $data);
+        } else {
+            $data['user_id'] = $userId;
+            return $this->insert($data);
+        }
     }
 }
