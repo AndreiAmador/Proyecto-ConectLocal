@@ -198,3 +198,33 @@ body::before {
     height: 100%;
     z-index: -2;
 }
+
+/*---------------------------------------para_dejar_margen_en_contenido--------------------------------------------*/
+.content {
+    padding: 40px 60px;   /* separación de bordes */
+    text-align: left;     /* fuerza alineación */
+}
+
+
+.page {
+    max-width: 1200px;
+}
+
+
+/*---------------------------------------para_dejar_margen_en_header--------------------------------------------*/
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+/*---------------------------------------responsive_móvil--------------------------------------------*/
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .content {
+        padding: 30px 20px;
+    }
+}
