@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // RUTA PRINCIPAL DEL PROYECTO (la oficial)
 $routes->get('/', 'Home::index');
+$routes->get('/home', 'Home::index');
 $routes->get('/auth/login', 'Auth::login');
 $routes->post('/auth/loginPost', 'Auth::loginPost');
 $routes->get('/auth/register', 'Auth::register');
