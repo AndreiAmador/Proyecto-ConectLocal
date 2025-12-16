@@ -84,6 +84,12 @@ body::before {
     width: 100%;
 }
 
+.card,
+.header {
+    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.75);
+}
+
 /*---------------------------------------BOTONES--------------------------------------------*/
 
 .btn {
