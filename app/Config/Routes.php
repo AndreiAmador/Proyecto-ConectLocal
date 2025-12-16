@@ -37,3 +37,11 @@ $routes->get('/services/my-posts', 'Services::myPosts');    // GET: muestra mis 
 $routes->get('/services/edit/(:num)', 'Services::edit/$1'); // GET: muestra formulario editar
 $routes->post('/services/update/(:num)', 'Services::update/$1'); // POST: procesa edición
 $routes->get('/services/delete/(:num)', 'Services::delete/$1');  // GET: elimina publicación
+
+// Rutas para ofertas locales
+$routes->get('/local-offers/create', 'LocalOffers::create');
+$routes->post('/local-offers/store', 'LocalOffers::store');
+$routes->get('/local-offers/my-offers', 'LocalOffers::myOffers');
+$routes->get('/local-offers/edit/(:num)', 'LocalOffers::edit/$1');
+$routes->post('/local-offers/update/(:num)', 'LocalOffers::update/$1');
+$routes->get('/local-offers/delete/(:num)', 'LocalOffers::delete/$1');

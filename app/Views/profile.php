@@ -14,12 +14,28 @@
 <p><strong>Teléfono:</strong> <?= esc($profile['phone']) ?></p>
 <p><strong>Enlace social:</strong> <a href="<?= esc($profile['social_link']) ?>"><?= esc($profile['social_link']) ?></a></p>
 
-<a href="/profile/edit">Editar perfil</a>
-<a href="/auth/logout">Cerrar sesión</a>
-<!-- En cualquier parte de tu profile.php -->
-<p><a href="/jobs">Ver y gestionar mi currículum (trabajos realizados)</a></p>
+<p>
+    <a href="/profile/edit">Editar perfil</a> | 
+    <a href="/auth/logout">Cerrar sesión</a>
+</p>
 
 <hr>
-<p><a href="/services/create">Publicar mi primer servicio</a></p>
+
+<!-- Sección de Ofertas Locales -->
+<h2>Ofertas Locales</h2>
+<p><a href="/local-offers/create">Publicar nueva oferta local</a></p>
+<p><a href="/local-offers/my-offers">Gestionar mis ofertas</a></p>
+
+<hr>
+
+<!-- Sección de CV/Trabajos -->
+<h2>Mi Currículum</h2>
+<p><a href="/jobs/create">Agregar nuevo trabajo</a></p>
+<p><a href="/jobs">Ver y gestionar mi currículum</a></p>
+
+<hr>
+
+<!-- Sección de Servicios -->
+<h2>Servicios Publicados</h2>
 <p><a href="/services/create">Publicar nuevo servicio</a></p>
-<p><a href="/services/my-posts">Gestionar publicaciones</a></p>
+<p><a href="/services/my-posts">Gestionar mis publicaciones</a></p>
