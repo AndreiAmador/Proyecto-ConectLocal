@@ -121,6 +121,33 @@ body::before {
     box-shadow: 0 0 10px var(--btn-glow);
 }
 
+/* ===== Variantes a los botones ===== */
+
+.btn-primary {
+    --btn-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+    --btn-glow: rgba(59, 130, 246, 0.6);
+}
+
+.btn-success {
+    --btn-bg: linear-gradient(135deg, #22c55e, #16a34a);
+    --btn-glow: rgba(34, 197, 94, 0.6);
+}
+
+.btn-error {
+    --btn-bg: linear-gradient(135deg, #ef4444, #b91c1c);
+    --btn-glow: rgba(239, 68, 68, 0.6);
+}
+
+.btn-warning {
+    --btn-bg: linear-gradient(135deg, #f59e0b, #d97706);
+    --btn-glow: rgba(245, 158, 11, 0.6);
+}
+
+.btn-info {
+    --btn-bg: linear-gradient(135deg, #38bdf8, #0284c7);
+    --btn-glow: rgba(56, 189, 248, 0.6);
+}
+
 
 /*---------------------------------------TABLA--------------------------------------------*/
 
