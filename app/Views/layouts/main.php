@@ -9,6 +9,11 @@
 </head>
 <body>
 
+<!-- page-loader -->
+<div id="page-loader">
+    <div class="spinner"></div>
+</div>
+
 <canvas id="stars"></canvas>
 
 <header class="header">
@@ -43,6 +48,8 @@
 <script src="<?= base_url('js/mouse-trail.js') ?>"></script>
 
 <script src="<?= base_url('js/stars.js') ?>"></script>
+
+<script src="<?= base_url('js/loader.js') ?>"></script>
 
 </body>
 </html>

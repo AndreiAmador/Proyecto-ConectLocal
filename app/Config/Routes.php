@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // RUTA PRINCIPAL DEL PROYECTO (la oficial)
-$routes->get('/', 'Home::index');
+//$routes->get('/', 'Home::index');
 
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +17,5 @@ $routes->get('/', 'Home::index');
 | NO deben usarse en producción.
 */
 
-// $routes->get('/preview', 'Preview::index');
-// $routes->get('/login', 'Preview::login');
+ $routes->get('/preview', 'Preview::index');
+ $routes->get('/login', 'Preview::login');
