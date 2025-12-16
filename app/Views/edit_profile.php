@@ -1,5 +1,12 @@
+<?= $this->extend('layouts/main') ?>
+
+<?= $this->section('content') ?>
+
+<h2>Editar perfil</h2>
+
+<!-- ALERTAS CON TU DISEÑO -->
 <?php if (session()->getFlashdata('error')): ?>
-    <div class="alert alert-danger">
+    <div class="alert alert-error">
         <?= session()->getFlashdata('error'); ?>
     </div>
 <?php endif; ?>
@@ -10,26 +17,43 @@
     </div>
 <?php endif; ?>
 
-<!-- CAMBIO IMPORTANTE: action="/profile/edit" en lugar de "/auth/saveProfile" -->
-<form action="/profile/edit" method="post" enctype="multipart/form-data">
-    <div>
-        <label for="bio">Bio:</label>
-        <textarea name="bio" id="bio"><?= old('bio', $profile['bio'] ?? '') ?></textarea>
+<!-- FORMULARIO CON DISEÑO -->
+<form action="/profile/edit" method="post" enctype="multipart/form-data" class="card form">
+
+    <div class="form-group">
+        <label for="bio">Bio</label>
+        <textarea name="bio" id="bio" rows="3"><?= old('bio', $profile['bio'] ?? '') ?></textarea>
     </div>
-    <div>
-        <label for="phone">Teléfono:</label>
-        <input type="text" name="phone" id="phone" value="<?= old('phone', $profile['phone'] ?? '') ?>" required>
+
+    <div class="form-group">
+        <label for="phone">Teléfono</label>
+        <input type="text" name="phone" id="phone"
+               value="<?= old('phone', $profile['phone'] ?? '') ?>" required>
     </div>
-    <div>
-        <label for="social_link">Enlace social:</label>
-        <input type="text" name="social_link" id="social_link" value="<?= old('social_link', $profile['social_link'] ?? '') ?>" required>
+
+    <div class="form-group">
+        <label for="social_link">Enlace social</label>
+        <input type="text" name="social_link" id="social_link"
+               value="<?= old('social_link', $profile['social_link'] ?? '') ?>" required>
     </div>
-    <div>
-        <label for="photo">Foto de perfil:</label>
+
+    <div class="form-group">
+        <label for="photo">Foto de perfil</label>
         <input type="file" name="photo" id="photo">
-        <?php if (isset($profile['photo']) && $profile['photo']): ?>
-            <p>Foto actual: <img src="<?= base_url($profile['photo']) ?>" style="max-width: 100px;"></p>
+
+        <?php if (!empty($profile['photo'])): ?>
+            <div class="profile-photo-preview">
+                <p>Foto actual:</p>
+                <img src="<?= base_url($profile['photo']) ?>" alt="Foto de perfil">
+            </div>
         <?php endif; ?>
     </div>
-    <button type="submit">Guardar perfil</button>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Guardar perfil</button>
+        <a href="/profile" class="btn btn-secondary">Cancelar</a>
+    </div>
+
 </form>
+
+<?= $this->endSection() ?>
