@@ -27,7 +27,22 @@
 </header>
 
 <main class="container content">
+
+    <!-- CONTENEDOR DE ALERTAS -->
+    <div id="alert-container"></div>
+
     <?= $this->renderSection('content') ?>
+
+    <!-- BOTONES DE PRUEBA -->
+    <div class="card">
+        <h3 class="card-title">Pruebas de alertas</h3>
+
+        <button class="btn btn-success" onclick="showAlert('success')">Éxito</button>
+        <button class="btn btn-error" onclick="showAlert('error')">Error</button>
+        <button class="btn btn-warning" onclick="showAlert('warning')">Advertencia</button>
+        <button class="btn btn-info" onclick="showAlert('info')">Información</button>
+    </div>
+
 </main>
 
 <footer class="footer">
@@ -50,6 +65,8 @@
 <script src="<?= base_url('js/stars.js') ?>"></script>
 
 <script src="<?= base_url('js/loader.js') ?>"></script>
+
+<script src="<?= base_url('js/alerts.js') ?>"></script>
 
 </body>
 </html>
