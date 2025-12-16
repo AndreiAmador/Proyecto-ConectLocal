@@ -26,6 +26,16 @@
 </main>
 
 <footer class="footer">
+
+    <!-- cartas de preuba -->
+    <div class="card">
+    <h3 class="card-title">Panel informativo</h3>
+    <p class="card-text">
+        Aquí se mostrará información del sistema.
+    </p>
+    <button class="btn btn-primary">Acción</button>
+    
+</div>
     <p>© 2025 ConectLocal · Proyecto escolar</p>
 </footer>
 
