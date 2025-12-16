@@ -39,12 +39,38 @@ class Auth extends Controller
         $model->save([
             'username' => $username,
             'email'    => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),  // Encriptar la contraseña
             'password' => password_hash($password, PASSWORD_DEFAULT),
         ]);
 
         // Obtener el ID del usuario recién registrado
         $userId = $model->getInsertID();
 
+        // Cargar el perfil vacío inicialmente (sin foto)
+        $profileModel = new UserProfileModel();
+        $profileModel->saveProfile($userId, [
+            'bio' => '',
+            'phone' => '',
+            'social_link' => '',
+            'photo' => ''  // Sin foto aún
+        ]);
+
+        return redirect()->to('/auth/login')->with('success', 'Registro exitoso, ahora puedes iniciar sesión');
+    }
+
+    // Mostrar el formulario de perfil
+    public function profile()
+    {
+        $userId = session()->get('user_id');  // Obtener el ID del usuario logueado
+        $profileModel = new UserProfileModel();
+        $profile = $profileModel->getProfileByUserId($userId);
+
+        return view('profile', ['profile' => $profile]);
+    }
+
+    // Guardar el perfil del usuario (incluyendo la foto)
+    public function saveProfile()
+    {
         // Iniciar sesión automáticamente después del registro
         session()->set('loggedIn', true);
         session()->set('username', $username);
@@ -113,6 +139,24 @@ class Auth extends Controller
             'bio' => $this->request->getPost('bio'),
             'phone' => $this->request->getPost('phone'),
             'social_link' => $this->request->getPost('social_link'),
+            'photo' => '',  // Inicialmente vacía
+        ];
+
+        // Subir la foto si el usuario la ha proporcionado
+        if ($this->request->getFile('photo')->isValid()) {
+            $photo = $this->request->getFile('photo');
+            $newName = $photo->getRandomName();  // Generar un nombre único
+            $photo->move(WRITEPATH . 'uploads', $newName);  // Mover la foto a la carpeta de subidas
+
+            // Actualizar el campo 'photo' con la ruta de la imagen
+            $data['photo'] = WRITEPATH . 'uploads/' . $newName;
+        }
+
+        // Guardar el perfil actualizado
+        $profileModel = new UserProfileModel();
+        $profileModel->saveProfile($userId, $data);
+
+        return redirect()->to('/profile')->with('success', 'Perfil actualizado exitosamente');
         ];
 
         // Manejar la subida de la foto
