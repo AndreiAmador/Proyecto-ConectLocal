@@ -304,3 +304,18 @@ select:focus {
 .card-text {
     color: #cbd5f5;
 }
+
+.card,
+.table-container,
+.header,
+.footer {
+    box-shadow: var(--shadow-md);
+}
+
+/*---------------------------------------sombras_suaves--------------------------------------------*/
+:root {
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.25);
+    --shadow-md: 0 8px 24px rgba(0,0,0,0.35);
+    --shadow-lg: 0 16px 40px rgba(0,0,0,0.45);
+}
+
