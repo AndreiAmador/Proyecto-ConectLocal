@@ -93,51 +93,32 @@ body::before {
 /*---------------------------------------BOTONES--------------------------------------------*/
 
 .btn {
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: 1px solid transparent;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: none;
     cursor: pointer;
     font-size: 14px;
-    font-weight: 500;
-    transition: all 0.25s ease;
-}
+    font-weight: 600;
+    color: #fff;
 
-/* Primario */
-.btn-primary {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white;
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
-}
+    background: var(--btn-bg);
+    box-shadow: 0 0 12px var(--btn-glow);
 
-.btn-primary:hover {
-    box-shadow: 0 0 16px rgba(59, 130, 246, 0.7);
-    transform: translateY(-1px);
-}
-
-/* Secundario */
-.btn-secondary {
-    background: transparent;
-    color: #93c5fd;
-    border: 1px solid #60a5fa;
-}
-
-.btn-secondary:hover {
-    background: rgba(96, 165, 250, 0.1);
-}
-
-/* Peligro */
-.btn-danger {
-    background: linear-gradient(135deg, #ef4444, #b91c1c);
-    color: white;
-}
-
-.btn {
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
 }
 
 .btn:hover {
-    box-shadow: 0 0 18px rgba(96, 165, 250, 0.7);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--btn-glow);
+    filter: brightness(1.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 0 10px var(--btn-glow);
 }
 
 
