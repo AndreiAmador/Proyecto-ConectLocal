@@ -8,11 +8,13 @@ use CodeIgniter\Controller;
 
 class Auth extends Controller
 {
+    // Mostrar el formulario de registro
     public function register()
     {
         return view('register');
     }
 
+    // Procesar el formulario de registro
     public function registerPost()
     {
         $username = $this->request->getPost('username');
@@ -33,26 +35,32 @@ class Auth extends Controller
             return redirect()->to('/auth/register')->with('error', 'El correo electrónico ya está registrado');
         }
 
+        // Registrar el nuevo usuario
         $model->save([
             'username' => $username,
             'email'    => $email,
             'password' => password_hash($password, PASSWORD_DEFAULT),
         ]);
 
+        // Obtener el ID del usuario recién registrado
         $userId = $model->getInsertID();
 
+        // Iniciar sesión automáticamente después del registro
         session()->set('loggedIn', true);
         session()->set('username', $username);
         session()->set('user_id', $userId);
 
-        return redirect()->to('/profile/edit');
+        // Redirigir directamente al formulario de perfil
+        return redirect()->to('/profile/edit')->with('success', 'Registro exitoso. Complete su perfil.');
     }
 
+    // Mostrar el formulario de login
     public function login()
     {
         return view('login');
     }
 
+    // Procesar el formulario de login
     public function loginPost()
     {
         $username = $this->request->getPost('username');
@@ -72,34 +80,18 @@ class Auth extends Controller
             if ($profile) {
                 return redirect()->to('/profile');
             } else {
-                return redirect()->to('/profile/edit');
+                return redirect()->to('/profile/edit')->with('info', 'Complete su perfil por primera vez');
             }
         } else {
             return redirect()->to('/auth/login')->with('error', 'Credenciales incorrectas');
         }
     }
 
-    public function profile()
-    {
-        if (!session()->get('loggedIn')) {
-            return redirect()->to('/auth/login');
-        }
-
-        $userId = session()->get('user_id');
-        $profileModel = new UserProfileModel();
-        $profile = $profileModel->getProfileByUserId($userId);
-
-        if (!$profile) {
-            return redirect()->to('/profile/edit');
-        }
-
-        return view('profile', ['profile' => $profile]);
-    }
-
+    // Mostrar el formulario de edición de perfil
     public function editProfile()
     {
         if (!session()->get('loggedIn')) {
-            return redirect()->to('/auth/login');
+            return redirect()->to('/auth/login')->with('error', 'Por favor, inicie sesión primero');
         }
 
         $userId = session()->get('user_id');
@@ -109,49 +101,76 @@ class Auth extends Controller
         return view('edit_profile', ['profile' => $profile ?? []]);
     }
 
+    // Guardar el perfil del usuario
     public function saveProfile()
     {
         if (!session()->get('loggedIn')) {
-            return redirect()->to('/auth/login');
+            return redirect()->to('/auth/login')->with('error', 'Por favor, inicie sesión primero');
         }
 
         $userId = session()->get('user_id');
-        $profileModel = new UserProfileModel();
-        
-        // Obtener perfil actual para mantener la foto si no se sube nueva
-        $currentProfile = $profileModel->getProfileByUserId($userId);
-        $currentPhoto = $currentProfile['photo'] ?? '';
-
         $data = [
             'bio' => $this->request->getPost('bio'),
             'phone' => $this->request->getPost('phone'),
             'social_link' => $this->request->getPost('social_link'),
-            'photo' => $currentPhoto
         ];
 
-        // Manejar subida de foto
+        // Manejar la subida de la foto
         $photoFile = $this->request->getFile('photo');
         if ($photoFile && $photoFile->isValid() && !$photoFile->hasMoved()) {
-            $uploadPath = WRITEPATH . 'uploads/';
-            
+            $uploadPath = WRITEPATH . 'uploads/profiles/';
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 0777, true);
             }
-            
             $newName = $photoFile->getRandomName();
             if ($photoFile->move($uploadPath, $newName)) {
-                $data['photo'] = 'uploads/' . $newName;
+                $data['photo'] = 'uploads/profiles/' . $newName;
             }
         }
 
-        $profileModel->saveProfile($userId, $data);
+        $profileModel = new UserProfileModel();
+        $result = $profileModel->saveProfile($userId, $data);
 
-        return redirect()->to('/profile');
+        if ($result) {
+            return redirect()->to('/profile')->with('success', 'Perfil guardado exitosamente');
+        } else {
+            return redirect()->to('/profile/edit')->with('error', 'Error al guardar el perfil');
+        }
     }
 
+    // Mostrar el perfil del usuario
+    public function profile()
+    {
+        if (!session()->get('loggedIn')) {
+            return redirect()->to('/auth/login')->with('error', 'Por favor, inicie sesión primero');
+        }
+
+        $userId = session()->get('user_id');
+        $profileModel = new UserProfileModel();
+        $profile = $profileModel->getProfileByUserId($userId);
+
+        if (!$profile) {
+            return redirect()->to('/profile/edit')->with('error', 'Complete su perfil primero');
+        }
+
+        // Obtener trabajos y servicios
+        $jobModel = new \App\Models\UserJobModel();
+        $jobs = $jobModel->getJobsByUserId($userId);
+
+        $serviceModel = new \App\Models\ServicePostModel();
+        $services = $serviceModel->getPostsByUser($userId);
+
+        return view('profile', [
+            'profile' => $profile,
+            'jobs' => $jobs,
+            'services' => $services
+        ]);
+    }
+
+    // Cerrar sesión
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/auth/login');
+        return redirect()->to('/auth/login')->with('success', 'Sesión cerrada exitosamente');
     }
 }

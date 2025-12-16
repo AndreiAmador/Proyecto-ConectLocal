@@ -18,3 +18,8 @@
 <a href="/auth/logout">Cerrar sesión</a>
 <!-- En cualquier parte de tu profile.php -->
 <p><a href="/jobs">Ver y gestionar mi currículum (trabajos realizados)</a></p>
+
+<hr>
+<p><a href="/services/create">Publicar mi primer servicio</a></p>
+<p><a href="/services/create">Publicar nuevo servicio</a></p>
+<p><a href="/services/my-posts">Gestionar publicaciones</a></p>

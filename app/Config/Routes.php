@@ -29,3 +29,11 @@ $routes->post('/jobs/store', 'Jobs::store');             // Guardar trabajo (POS
 $routes->get('/jobs/edit/(:num)', 'Jobs::edit/$1');      // Ver formulario de edición
 $routes->post('/jobs/update/(:num)', 'Jobs::update/$1'); // Actualizar trabajo
 $routes->get('/jobs/delete/(:num)', 'Jobs::delete/$1');  // Eliminar trabajo
+
+// Asegúrate de tener estas rutas:
+$routes->get('/services/create', 'Services::create');       // GET: muestra formulario
+$routes->post('/services/store', 'Services::store');        // POST: procesa formulario
+$routes->get('/services/my-posts', 'Services::myPosts');    // GET: muestra mis publicaciones
+$routes->get('/services/edit/(:num)', 'Services::edit/$1'); // GET: muestra formulario editar
+$routes->post('/services/update/(:num)', 'Services::update/$1'); // POST: procesa edición
+$routes->get('/services/delete/(:num)', 'Services::delete/$1');  // GET: elimina publicación
