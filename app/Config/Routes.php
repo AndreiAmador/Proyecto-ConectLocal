@@ -5,6 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
+// RUTA PRINCIPAL DEL PROYECTO (la oficial)
 $routes->get('/', 'Home::index');
 $routes->get('/auth/login', 'Auth::login');
 $routes->post('/auth/loginPost', 'Auth::loginPost');
@@ -45,3 +47,14 @@ $routes->get('/local-offers/my-offers', 'LocalOffers::myOffers');
 $routes->get('/local-offers/edit/(:num)', 'LocalOffers::edit/$1');
 $routes->post('/local-offers/update/(:num)', 'LocalOffers::update/$1');
 $routes->get('/local-offers/delete/(:num)', 'LocalOffers::delete/$1');
+
+/*
+|--------------------------------------------------------------------------
+| RUTAS TEMPORALES SOLO PARA DISEÑO (DESARROLLO)
+|--------------------------------------------------------------------------
+| Estas rutas son SOLO para previsualizar el diseño.
+| NO deben usarse en producción.
+*/
+
+// $routes->get('/preview', 'Preview::index');
+// $routes->get('/login', 'Preview::login');
