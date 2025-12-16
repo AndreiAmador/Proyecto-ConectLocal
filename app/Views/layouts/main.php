@@ -31,7 +31,10 @@
     <!-- CONTENEDOR DE ALERTAS -->
     <div id="alert-container"></div>
 
-    <?= $this->renderSection('content') ?>
+    <div class="page-content">
+        <?= $this->renderSection('content') ?>
+    </div>
+
 
     <!-- BOTONES DE PRUEBA -->
     <div class="card">

@@ -380,3 +380,23 @@ select:focus {
     margin-bottom: 1rem;
     opacity: 1;
 }
+
+/*---------------------------------------dar_espacio_y_orden--------------------------------------------*/
+.content {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+.page-content {
+    margin-bottom: 40px;
+}
+
+/* Si hay formularios */
+.page-content form {
+    margin-top: 20px;
+}
+
+/* Inputs y botones dentro del contenido */
+.page-content button {
+    margin-top: 16px;
+}
