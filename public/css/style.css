@@ -400,3 +400,35 @@ select:focus {
 .page-content button {
     margin-top: 16px;
 }
+
+/*---------------------------------------para_jobs_index--------------------------------------------*/
+.page-title {
+    margin-bottom: 1.5rem;
+}
+
+.actions {
+    margin: 1.5rem 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.job-image {
+    width: 100%;
+    border-radius: 8px;
+    margin: 0.75rem 0;
+}
+
+.muted {
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}

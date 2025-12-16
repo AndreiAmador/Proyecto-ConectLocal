@@ -1,43 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Agregar Trabajo</title>
-</head>
-<body>
-    <h1>Agregar Trabajo Realizado</h1>
+<?= $this->extend('layouts/main') ?>
 
-    <?php if (session()->getFlashdata('error')): ?>
-        <div class="alert alert-danger">
-            <?= session()->getFlashdata('error'); ?>
-        </div>
-    <?php endif; ?>
+<?= $this->section('content') ?>
 
-    <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success">
-            <?= session()->getFlashdata('success'); ?>
-        </div>
-    <?php endif; ?>
+<h1>Agregar Trabajo Realizado</h1>
 
-    <form action="/jobs/store" method="post">
-        <div>
-            <label for="job_title">Título del trabajo:</label><br>
-            <input type="text" name="job_title" id="job_title" required>
-        </div>
-        
-        <div>
-            <label for="job_image">Imagen (URL):</label><br>
-            <input type="text" name="job_image" id="job_image" placeholder="https://.../foto.jpg">
-        </div>
-        
-        <div>
-            <label for="description">Descripción:</label><br>
-            <textarea name="description" id="description" rows="4" required></textarea>
-        </div>
-        
-        <button type="submit">Guardar Trabajo</button>
-    </form>
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-error">
+        <?= session()->getFlashdata('error'); ?>
+    </div>
+<?php endif; ?>
 
-    <p><a href="/jobs">Volver a la lista de trabajos</a></p>
-</body>
-</html>
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert alert-success">
+        <?= session()->getFlashdata('success'); ?>
+    </div>
+<?php endif; ?>
+
+<form action="/jobs/store" method="post" class="card">
+    <div class="form-group">
+        <label for="job_title">Título del trabajo</label>
+        <input type="text" name="job_title" id="job_title" required>
+    </div>
+
+    <div class="form-group">
+        <label for="job_image">Imagen (URL)</label>
+        <input type="text" name="job_image" id="job_image" placeholder="https://...">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea name="description" id="description" rows="4" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Trabajo</button>
+</form>
+
+<p>
+    <a href="/jobs" class="btn btn-secondary">← Volver</a>
+</p>
+
+<?= $this->endSection() ?>
