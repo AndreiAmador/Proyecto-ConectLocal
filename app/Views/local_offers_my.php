@@ -1,48 +1,84 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mis Ofertas Locales</title>
-</head>
-<body>
-    <h1>Mis Ofertas Locales</h1>
+<?= $this->extend('layouts/main') ?>
 
-    <?php if (session()->getFlashdata('success')): ?>
-        <div style="color: green; padding: 10px; background: #d4edda;">
-            <?= session()->getFlashdata('success'); ?>
-        </div>
-    <?php endif; ?>
+<?= $this->section('content') ?>
 
-    <?php if (session()->getFlashdata('error')): ?>
-        <div style="color: red; padding: 10px; background: #f8d7da;">
-            <?= session()->getFlashdata('error'); ?>
-        </div>
-    <?php endif; ?>
+<h2>Mis ofertas locales</h2>
 
-    <p><a href="/local-offers/create">Crear nueva oferta</a></p>
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert alert-success">
+        <?= session()->getFlashdata('success'); ?>
+    </div>
+<?php endif; ?>
 
-    <?php if (empty($offers)): ?>
-        <p>No has publicado ofertas locales.</p>
-    <?php else: ?>
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-error">
+        <?= session()->getFlashdata('error'); ?>
+    </div>
+<?php endif; ?>
+
+<div class="actions">
+    <a href="/local-offers/create" class="btn btn-primary">
+        Crear nueva oferta
+    </a>
+</div>
+
+<?php if (empty($offers)): ?>
+    <p>No has publicado ofertas locales.</p>
+<?php else: ?>
+
+    <div class="grid">
         <?php foreach ($offers as $offer): ?>
-            <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px;">
+            <div class="card">
+
                 <h3><?= esc($offer['title']) ?></h3>
+
                 <p><strong>Categoría:</strong> <?= esc($offer['category']) ?></p>
-                <p><strong>Descripción:</strong> <?= nl2br(esc($offer['description'])) ?></p>
-                <p><strong>Precio:</strong> $<?= number_format($offer['price'], 2) ?> MXN</p>
-                <p><strong>Ubicación:</strong> <?= esc($offer['location']) ?></p>
-                <?php if ($offer['image_url']): ?>
-                    <img src="<?= esc($offer['image_url']) ?>" alt="<?= esc($offer['title']) ?>" style="max-width: 200px;">
-                <?php endif; ?>
-                <p><small>Publicado: <?= date('d/m/Y', strtotime($offer['created_at'])) ?></small></p>
-                <p>
-                    <a href="/local-offers/edit/<?= $offer['id'] ?>">Editar</a> | 
-                    <a href="/local-offers/delete/<?= $offer['id'] ?>" onclick="return confirm('¿Eliminar esta oferta?')">Eliminar</a>
+
+                <p><?= nl2br(esc($offer['description'])) ?></p>
+
+                <p><strong>Precio:</strong>
+                    $<?= number_format($offer['price'], 2) ?> MXN
                 </p>
+
+                <p><strong>Ubicación:</strong>
+                    <?= esc($offer['location']) ?>
+                </p>
+
+                <?php if (!empty($offer['image_url'])): ?>
+                    <img
+                        src="<?= esc($offer['image_url']) ?>"
+                        alt="<?= esc($offer['title']) ?>"
+                        class="img-preview"
+                    >
+                <?php endif; ?>
+
+                <p class="text-muted">
+                    Publicado: <?= date('d/m/Y', strtotime($offer['created_at'])) ?>
+                </p>
+
+                <div class="card-actions">
+                    <a href="/local-offers/edit/<?= $offer['id'] ?>" class="btn btn-secondary">
+                        Editar
+                    </a>
+
+                    <a
+                        href="/local-offers/delete/<?= $offer['id'] ?>"
+                        class="btn btn-danger"
+                        onclick="return confirm('¿Eliminar esta oferta?')"
+                    >
+                        Eliminar
+                    </a>
+                </div>
+
             </div>
         <?php endforeach; ?>
-    <?php endif; ?>
+    </div>
 
-    <p><a href="/profile">Volver al perfil</a> | <a href="/">Ver todas las ofertas</a></p>
-</body>
-</html>
+<?php endif; ?>
+
+<div class="actions">
+    <a href="/profile" class="btn btn-secondary">Volver al perfil</a>
+    <a href="/" class="btn btn-link">Ver todas las ofertas</a>
+</div>
+
+<?= $this->endSection() ?>
