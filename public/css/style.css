@@ -148,6 +148,16 @@ body::before {
     --btn-glow: rgba(56, 189, 248, 0.6);
 }
 
+/* ================= FIX: BOTONES COMO <a> ================= */
+
+a.btn,
+a.btn:visited,
+a.btn:hover,
+a.btn:active {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
 
 /*---------------------------------------TABLA--------------------------------------------*/
 
@@ -532,46 +542,63 @@ select:focus {
 }
 
 /*---------------------------------------diseño_al_contenido--------------------------------------------*/
-
 .page-content {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(15, 23, 42, 0.65); /* azul oscuro translúcido */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
     padding: 40px;
     border-radius: 16px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     max-width: 900px;
     margin: 40px auto;
-    color: #111827; /* color base del card */
+
+    box-shadow:
+        0 0 0 1px rgba(148, 163, 184, 0.15),
+        0 25px 60px rgba(0, 0, 0, 0.5);
+
+    color: #e5e7eb; /* texto base claro */
 }
 
 .page-content h1,
 .page-content h2,
 .page-content h3 {
-    color: #020617;
+    color: #f8fafc;
+    text-shadow: 0 0 12px rgba(147, 197, 253, 0.35);
 }
 
 .page-content p,
 .page-content li,
 .page-content span {
-    color: #1f2937;
+    color: #cbd5f5;
 }
 
-.page-content a {
-    color: #2563eb;
+.page-content a:not(.btn) {
+    color: #93c5fd;
+    text-decoration: none;
 }
 
-.page-content a:hover {
-    color: #1e40af;
+.page-content a:not(.btn):hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(147, 197, 253, 0.6);
 }
 
-.form-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
+.page-content hr {
+    border: none;
+    height: 1px;
+    margin: 40px 0;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(147, 197, 253, 0.4),
+        transparent
+    );
 }
 
 .profile-photo-preview img {
     margin-top: 8px;
     max-width: 120px;
-    border-radius: 10px;
-    box-shadow: 0 0 12px rgba(30, 58, 138, 0.4);
+    border-radius: 12px;
+    box-shadow:
+        0 0 20px rgba(56, 189, 248, 0.4),
+        0 0 40px rgba(56, 189, 248, 0.15);
 }
