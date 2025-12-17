@@ -65,11 +65,11 @@
 
     <!-- cartas de preuba -->
     <div class="card">
-    <h3 class="card-title">Panel informativo</h3>
-    <p class="card-text">
-        Aquí se mostrará información del sistema.
-    </p>
-    <button class="btn btn-primary">Acción</button>
+    <p>Desarrollado por:</p>
+    <p>André San Arce</p>
+    <p>Armando Andrei Amador</p>
+    <p>Plataforma para conectar servicios y ofertas locales en tu comunidad.</p>
+    <p>Desarrollado con CodeIgniter 4 • PHP • MySQL</p>
     
 </div>
     <p>© 2025 ConectLocal · Proyecto escolar</p>
