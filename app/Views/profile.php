@@ -42,3 +42,4 @@
 <h2>Servicios Publicados</h2>
 <p><a href="/services/create">Publicar nuevo servicio</a></p>
 <p><a href="/services/my-posts">Gestionar mis publicaciones</a></p>
+<?= $this->endSection() ?>
