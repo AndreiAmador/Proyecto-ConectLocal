@@ -1,59 +1,57 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Nueva Publicación</title>
-</head>
-<body>
-    <h1>Nueva Publicación de Servicio</h1>
+<?= $this->extend('layouts/main') ?>
 
-    <?php if (session()->getFlashdata('error')): ?>
-        <div style="color: red; padding: 10px; background: #f8d7da;">
-            <?= session()->getFlashdata('error'); ?>
-        </div>
-    <?php endif; ?>
+<?= $this->section('content') ?>
 
-    <form action="/services/store" method="post">
-        <div>
-            <label for="title">Título:</label><br>
-            <input type="text" name="title" id="title" required placeholder="Ej: Electricista 24/7">
-        </div>
-        
-        <div>
-            <label for="category">Categoría:</label><br>
-            <select name="category" id="category" required>
-                <option value="">Selecciona una categoría</option>
-                <option value="Electricidad">Electricidad</option>
-                <option value="Plomería">Plomería</option>
-                <option value="Mecánica">Mecánica</option>
-                <option value="Carpintería">Carpintería</option>
-                <option value="Jardinería">Jardinería</option>
-                <option value="Limpieza">Limpieza</option>
-                <option value="Construcción">Construcción</option>
-                <option value="Pintura">Pintura</option>
-                <option value="Otro">Otro</option>
-            </select>
-        </div>
-        
-        <div>
-            <label for="description">Descripción:</label><br>
-            <textarea name="description" id="description" rows="6" required 
-                      placeholder="Qué ofreces, zona, garantía, experiencia..."></textarea>
-        </div>
-        
-        <div>
-            <label for="price">Precio (MXN):</label><br>
-            <input type="number" name="price" id="price" step="0.01" min="0" required>
-        </div>
-        
-        <div>
-            <label for="image_url">Imagen (URL):</label><br>
-            <input type="text" name="image_url" id="image_url" placeholder="https://.../foto.jpg">
-        </div>
-        
-        <button type="submit">Publicar Servicio</button>
-    </form>
+<h1>Nueva Publicación de Servicio</h1>
 
-    <p><a href="/">Volver al inicio</a> | <a href="/profile">Volver al perfil</a></p>
-</body>
-</html>
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-error">
+        <?= session()->getFlashdata('error'); ?>
+    </div>
+<?php endif; ?>
+
+<form action="/services/store" method="post" class="form card">
+
+    <div class="form-group">
+        <label for="title">Título</label>
+        <input type="text" name="title" id="title" required placeholder="Ej: Electricista 24/7">
+    </div>
+
+    <div class="form-group">
+        <label for="category">Categoría</label>
+        <select name="category" id="category" required>
+            <option value="">Selecciona una categoría</option>
+            <option>Electricidad</option>
+            <option>Plomería</option>
+            <option>Mecánica</option>
+            <option>Carpintería</option>
+            <option>Jardinería</option>
+            <option>Limpieza</option>
+            <option>Construcción</option>
+            <option>Pintura</option>
+            <option>Otro</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea name="description" id="description" rows="5" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Precio (MXN)</label>
+        <input type="number" name="price" id="price" step="0.01" min="0" required>
+    </div>
+
+    <div class="form-group">
+        <label for="image_url">Imagen (URL)</label>
+        <input type="text" name="image_url" id="image_url">
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Publicar Servicio
+    </button>
+
+</form>
+
+<?= $this->endSection() ?>
