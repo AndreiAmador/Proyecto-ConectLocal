@@ -258,20 +258,40 @@ body::before {
 .content h3,
 .content p,
 .content label {
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
 }
 
 .content h1:hover,
 .content h2:hover,
-.content h3:hover {
-    color: #93c5fd;
-    text-shadow: 0 0 8px rgba(147, 197, 253, 0.8);
-}
-
+.content h3:hover,
 .content p:hover,
 .content label:hover {
-    color: #e0f2fe;
-    text-shadow: 0 0 4px rgba(147, 197, 253, 0.5);
+    color: #1e40af;
+}
+
+.content h1::after,
+.content h2::after,
+.content h3::after,
+.content p::after,
+.content label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #60a5fa, #93c5fd);
+    transition: width 0.3s ease;
+}
+
+.content h1:hover::after,
+.content h2:hover::after,
+.content h3:hover::after,
+.content p:hover::after,
+.content label:hover::after {
+    width: 100%;
 }
 
 /*---------------------------------------resaltar_texto_encabezado--------------------------------------------*/
