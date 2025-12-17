@@ -8,10 +8,9 @@ class UserJobModel extends Model
 {
     protected $table = 'user_jobs';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id', 'job_title', 'job_image', 'description'];
-    protected $useTimestamps = true;
-    protected $createdField = 'created_at';
-
+    protected $allowedFields = ['user_id', 'job_title', 'job_image', 'description', 'created_at'];
+    protected $useTimestamps = false; // CAMBIAR de true a false
+    
     public function getJobsByUserId($userId)
     {
         return $this->where('user_id', $userId)
@@ -31,6 +30,7 @@ class UserJobModel extends Model
     public function saveJob($userId, $data)
     {
         $data['user_id'] = $userId;
+        $data['created_at'] = date('Y-m-d H:i:s'); // Agregar fecha manualmente
         return $this->insert($data);
     }
 
