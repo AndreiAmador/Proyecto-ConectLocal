@@ -463,13 +463,13 @@ select:focus {
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
-    color: #1e293b;
+    color: #ffffff; /* blanco */
     position: relative;
     transition: color 0.3s ease;
 }
 
 .form-group label:hover {
-    color: #1e40af;
+    color: #93c5fd; /* azul espacial claro */
 }
 
 .form-group label::after {
@@ -487,24 +487,26 @@ select:focus {
     width: 100%;
 }
 
-/* INPUTS estilo “Nebula Light” */
+/* INPUTS estilo Nebula Dark */
 .form-group input,
 .form-group textarea {
     width: 100%;
     padding: 10px;
     border-radius: 8px;
 
-    /* Fondo claro con toque espacial */
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.7); /* fondo espacial */
+    border: 1px solid rgba(148, 163, 184, 0.5);
 
-    /* Texto oscuro para legibilidad */
-    color: #0f172a;
-
-    /* Sombra suave para dar profundidad */
+    color: #ffffff; /* texto blanco */
     box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
 
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Placeholders blancos suaves */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 /* FOCUS con aura azul espacial */
@@ -515,21 +517,6 @@ select:focus {
     box-shadow:
         0 0 0 2px rgba(96,165,250,0.3),
         0 0 12px rgba(147,197,253,0.4);
-}
-
-/* BOTONES */
-.form-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-/* PREVIEW DE FOTO */
-.profile-photo-preview img {
-    margin-top: 8px;
-    max-width: 120px;
-    border-radius: 10px;
-    box-shadow: 0 0 12px rgba(30, 58, 138, 0.4);
 }
 
 /*---------------------------------------action_para_home--------------------------------------------*/
@@ -553,53 +540,7 @@ select:focus {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     max-width: 900px;
     margin: 40px auto;
-}
-
-.page-content h1 {
-    font-size: 2.2rem;
-    margin-bottom: 25px;
-    border-bottom: 2px solid #eaeaea;
-    padding-bottom: 10px;
-}
-
-.page-content h2 {
-    font-size: 1.6rem;
-    margin-top: 35px;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.page-content p {
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 15px;
-    color: #444;
-}
-
-.page-content hr {
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #ccc, transparent);
-    margin: 40px 0;
-}
-
-.page-content a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.page-content a:hover {
-    text-decoration: underline;
-}
-
-.page-content {
-    color: #111827; /* negro */
-}
-
-.section-card {
-    background: #ffffff;
-    color: #111827;
+    color: #111827; /* color base del card */
 }
 
 .page-content h1,
@@ -622,22 +563,15 @@ select:focus {
     color: #1e40af;
 }
 
-.alert {
-    color: #020617;
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
 }
 
-.alert-success {
-    background: #dcfce7;
-}
-
-.alert-danger {
-    background: #fee2e2;
-}
-
-.alert-warning {
-    background: #fef3c7;
-}
-
-.alert-info {
-    background: #e0f2fe;
+.profile-photo-preview img {
+    margin-top: 8px;
+    max-width: 120px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(30, 58, 138, 0.4);
 }
