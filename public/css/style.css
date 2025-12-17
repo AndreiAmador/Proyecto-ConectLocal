@@ -478,3 +478,10 @@ select:focus {
 .actions {
     margin-top: 24px;
 }
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
