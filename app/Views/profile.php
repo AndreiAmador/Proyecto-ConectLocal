@@ -32,7 +32,6 @@
 
         <div class="profile-actions" style="margin-top: 20px; display: flex; gap: 12px;">
             <a href="/profile/edit" class="btn btn-primary">Editar perfil</a>
-            <a href="/auth/logout" class="btn btn-error">Cerrar sesión</a>
         </div>
     </div>
 </div>

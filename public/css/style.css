@@ -158,6 +158,44 @@ a.btn:active {
     text-decoration: none !important;
 }
 
+/* Normalizar botones y enlaces con clase btn */
+.btn,
+.btn:link,
+.btn:visited {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    font-family: inherit;
+
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #ffffff !important;
+}
+
+.btn-secondary {
+    --btn-bg: linear-gradient(135deg, #64748b, #475569);
+    --btn-glow: rgba(100, 116, 139, 0.6);
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+/* Normalizar altura REAL de botones y links */
+.btn {
+    height: 40px;              /* altura fija */
+    line-height: 1;            /* evita estiramiento vertical */
+    white-space: nowrap;       /* evita salto de línea */
+}
+
 
 /*---------------------------------------TABLA--------------------------------------------*/
 
