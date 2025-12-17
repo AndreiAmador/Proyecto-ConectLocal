@@ -1,3 +1,6 @@
+<?= $this->extend('layouts/main') ?>
+<?= $this->section('content') ?>
+
 <h1>Mi Perfil</h1>
 
 <?php if (session()->getFlashdata('success')): ?>
