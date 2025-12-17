@@ -15,8 +15,8 @@
 <p><strong>Enlace social:</strong> <a href="<?= esc($profile['social_link']) ?>"><?= esc($profile['social_link']) ?></a></p>
 
 <p>
-    <a href="/profile/edit">Editar perfil</a> | 
-    <a href="/auth/logout">Cerrar sesión</a>
+    <a href="/profile/edit">Editar perfil</a> 
+    
 </p>
 
 <hr>
