@@ -35,16 +35,29 @@
         <?= $this->renderSection('content') ?>
     </div>
 
-
-    <!-- BOTONES DE PRUEBA -->
-    <div class="card">
-        <h3 class="card-title">Pruebas de alertas</h3>
-
-        <button class="btn btn-success" onclick="showAlert('success')">Éxito</button>
-        <button class="btn btn-error" onclick="showAlert('error')">Error</button>
-        <button class="btn btn-warning" onclick="showAlert('warning')">Advertencia</button>
-        <button class="btn btn-info" onclick="showAlert('info')">Información</button>
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert alert-success">
+        <?= session()->getFlashdata('success') ?>
     </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('warning')): ?>
+    <div class="alert alert-warning">
+        <?= session()->getFlashdata('warning') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('info')): ?>
+    <div class="alert alert-info">
+        <?= session()->getFlashdata('info') ?>
+    </div>
+<?php endif; ?>
 
 </main>
 
