@@ -57,5 +57,5 @@ $routes->get('/local-offers/delete/(:num)', 'LocalOffers::delete/$1');
 | NO deben usarse en producción.
 */
 
-// $routes->get('/preview', 'Preview::index');
-// $routes->get('/login', 'Preview::login');
+ $routes->get('/preview', 'Preview::index');
+ $routes->get('/login', 'Preview::login');
