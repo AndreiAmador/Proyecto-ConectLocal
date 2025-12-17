@@ -458,40 +458,78 @@ select:focus {
     margin-bottom: 16px;
 }
 
+/* LABELS con efecto rayo espacial */
 .form-group label {
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
+    color: #1e293b;
+    position: relative;
+    transition: color 0.3s ease;
 }
 
+.form-group label:hover {
+    color: #1e40af;
+}
+
+.form-group label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #60a5fa, #93c5fd);
+    transition: width 0.3s ease;
+}
+
+.form-group label:hover::after {
+    width: 100%;
+}
+
+/* INPUTS estilo “Nebula Light” */
 .form-group input,
 .form-group textarea {
     width: 100%;
     padding: 10px;
     border-radius: 8px;
-    border: 1px solid #334155;
-    background: rgba(15, 23, 42, 0.6);
-    color: #e5e7eb;
+
+    /* Fondo claro con toque espacial */
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.6);
+
+    /* Texto oscuro para legibilidad */
+    color: #0f172a;
+
+    /* Sombra suave para dar profundidad */
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* FOCUS con aura azul espacial */
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: #60a5fa;
-    box-shadow: 0 0 0 2px rgba(96,165,250,0.3);
+    box-shadow:
+        0 0 0 2px rgba(96,165,250,0.3),
+        0 0 12px rgba(147,197,253,0.4);
 }
 
+/* BOTONES */
 .form-actions {
     display: flex;
     gap: 12px;
     margin-top: 20px;
 }
 
+/* PREVIEW DE FOTO */
 .profile-photo-preview img {
     margin-top: 8px;
     max-width: 120px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    box-shadow: 0 0 12px rgba(30, 58, 138, 0.4);
 }
 
 /*---------------------------------------action_para_home--------------------------------------------*/
