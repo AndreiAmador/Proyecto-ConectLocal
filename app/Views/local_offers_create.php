@@ -56,13 +56,15 @@
         <input type="text" name="image_url" id="image_url" placeholder="https://...">
     </div>
 
-    <div class="form-actions">
+    <div class="form-actions" style="display: flex; gap: 12px; margin-top: 20px;">
         <button type="submit" class="btn btn-primary">
             Publicar oferta
         </button>
+
         <a href="/" class="btn btn-secondary">
             Inicio
         </a>
+
         <a href="/profile" class="btn btn-secondary">
             Perfil
         </a>

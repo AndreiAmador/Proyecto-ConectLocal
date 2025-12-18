@@ -2,7 +2,20 @@
 
 <?= $this->section('content') ?>
 
-<h1>Servicios Disponibles</h1>
+<div class="page-header">
+    <h1 class="page-title">Servicios Disponibles</h1>
+
+    <?php if (session()->get('loggedIn')): ?>
+        <div class="actions">
+            <a href="/services/create" class="btn btn-primary">
+                + Publicar servicio
+            </a>
+            <a href="/services/my-posts" class="btn btn-secondary">
+                Mis publicaciones
+            </a>
+        </div>
+    <?php endif; ?>
+</div>
 
 <?php if (session()->getFlashdata('success')): ?>
     <div class="alert alert-success">
@@ -16,88 +29,116 @@
     </div>
 <?php endif; ?>
 
-<?php if (session()->get('loggedIn')): ?>
-    <p>
-        <a href="/services/create" class="btn btn-primary">Publicar servicio</a>
-        <a href="/services/my-posts" class="btn btn-secondary">Mis publicaciones</a>
-    </p>
-<?php endif; ?>
-
-<hr>
-
-<h2>Servicios</h2>
+<!-- ================= SERVICIOS ================= -->
+<h2 class="section-title">Servicios</h2>
 
 <?php if (empty($posts)): ?>
-    <p>No hay servicios publicados aún.</p>
+    <p class="muted">No hay servicios publicados aún.</p>
 <?php else: ?>
-    <?php foreach ($posts as $post): ?>
-        <div class="card">
 
-            <h3><?= esc($post['title']) ?></h3>
+    <div class="grid">
+        <?php foreach ($posts as $post): ?>
+            <div class="card service-card">
 
-            <p><strong>Categoría:</strong> <?= esc($post['category']) ?></p>
+                <h3 class="card-title"><?= esc($post['title']) ?></h3>
 
-            <p><?= nl2br(esc($post['description'])) ?></p>
+                <p><strong>Categoría:</strong> <?= esc($post['category']) ?></p>
 
-            <p><strong>Precio:</strong> $<?= number_format($post['price'], 2) ?> MXN</p>
+                <p class="card-text">
+                    <?= nl2br(esc($post['description'])) ?>
+                </p>
 
-            <?php if (!empty($post['image_url'])): ?>
-                <img src="<?= esc($post['image_url']) ?>" style="max-width:300px;">
-            <?php endif; ?>
+                <p>
+                    <strong>Precio:</strong>
+                    $<?= number_format($post['price'], 2) ?> MXN
+                </p>
 
-            <p class="text-muted">
-                Publicado por <?= esc($post['username'] ?? 'Usuario') ?> |
-                <?= date('d/m/Y', strtotime($post['created_at'])) ?>
-            </p>
+                <?php if (!empty($post['image_url'])): ?>
+                    <img
+                        src="<?= esc($post['image_url']) ?>"
+                        alt="<?= esc($post['title']) ?>"
+                        class="img-preview"
+                    >
+                <?php endif; ?>
 
-        </div>
-    <?php endforeach; ?>
+                <small class="muted">
+                    Publicado por <?= esc($post['username'] ?? 'Usuario') ?> ·
+                    <?= date('d/m/Y', strtotime($post['created_at'])) ?>
+                </small>
+
+            </div>
+        <?php endforeach; ?>
+    </div>
+
 <?php endif; ?>
 
 <hr>
 
-<h2>Ofertas Locales</h2>
+<!-- ================= OFERTAS LOCALES ================= -->
+<h2 class="section-title">Ofertas Locales</h2>
 
 <?php if (empty($offers)): ?>
-    <p>No hay ofertas locales publicadas aún.</p>
+    <p class="muted">No hay ofertas locales publicadas aún.</p>
 <?php else: ?>
-    <?php foreach ($offers as $offer): ?>
-        <div class="card">
 
-            <h3><?= esc($offer['title']) ?></h3>
+    <div class="grid">
+        <?php foreach ($offers as $offer): ?>
+            <div class="card offer-card">
 
-            <p><strong>Categoría:</strong> <?= esc($offer['category']) ?></p>
+                <h3 class="card-title"><?= esc($offer['title']) ?></h3>
 
-            <p><?= esc($offer['description']) ?></p>
+                <p><strong>Categoría:</strong> <?= esc($offer['category']) ?></p>
 
-            <p><strong>Precio:</strong> $<?= number_format($offer['price'], 2) ?> MXN</p>
+                <p class="card-text">
+                    <?= nl2br(esc($offer['description'])) ?>
+                </p>
 
-            <p><strong>Ubicación:</strong> <?= esc($offer['location']) ?></p>
+                <p>
+                    <strong>Precio:</strong>
+                    $<?= number_format($offer['price'], 2) ?> MXN
+                </p>
 
-            <?php if (!empty($offer['image_url'])): ?>
-                <img src="<?= esc($offer['image_url']) ?>" style="max-width:300px;">
-            <?php endif; ?>
+                <p>
+                    <strong>Ubicación:</strong> <?= esc($offer['location']) ?>
+                </p>
 
-            <p class="text-muted">
-                Publicado por <?= esc($offer['username'] ?? 'Usuario') ?>
-            </p>
+                <?php if (!empty($offer['image_url'])): ?>
+                    <img
+                        src="<?= esc($offer['image_url']) ?>"
+                        alt="<?= esc($offer['title']) ?>"
+                        class="img-preview"
+                    >
+                <?php endif; ?>
 
-        </div>
-    <?php endforeach; ?>
+                <small class="muted">
+                    Publicado por <?= esc($offer['username'] ?? 'Usuario') ?>
+                </small>
+
+            </div>
+        <?php endforeach; ?>
+    </div>
+
 <?php endif; ?>
 
 <hr>
 
-<?php if (session()->get('loggedIn')): ?>
-    <p>
-        <a href="/profile">Mi perfil</a> |
-        <a href="/auth/logout">Cerrar sesión</a>
-    </p>
-<?php else: ?>
-    <p>
-        <a href="/auth/login">Iniciar sesión</a> |
-        <a href="/auth/register">Registrarse</a>
-    </p>
-<?php endif; ?>
+<!-- ================= ACCIONES FINALES ================= -->
+<div class="actions bottom-actions">
+    <?php if (session()->get('loggedIn')): ?>
+        <a href="/profile" class="btn btn-secondary">
+            Mi perfil
+        </a>
+        <a href="/auth/logout" class="btn btn-error">
+            Cerrar sesión
+        </a>
+    <?php else: ?>
+        <a href="/auth/login" class="btn btn-primary">
+            Iniciar sesión
+        </a>
+        <a href="/auth/register" class="btn btn-info">
+            Registrarse
+        </a>
+    <?php endif; ?>
+</div>
 
 <?= $this->endSection() ?>

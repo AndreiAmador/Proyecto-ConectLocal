@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 
-<h2>Editar oferta local</h2>
+<h2 class="page-title">Editar oferta local</h2>
 
 <?php if (session()->getFlashdata('error')): ?>
     <div class="alert alert-error">
@@ -12,8 +12,9 @@
 
 <form action="/local-offers/update/<?= $offer['id'] ?>" method="post" class="card form">
 
+    <!-- TÍTULO -->
     <div class="form-group">
-        <label for="title">Título</label>
+        <label for="title">Título de la oferta</label>
         <input
             type="text"
             name="title"
@@ -23,6 +24,7 @@
         >
     </div>
 
+    <!-- CATEGORÍA -->
     <div class="form-group">
         <label for="category">Categoría</label>
         <select name="category" id="category" required>
@@ -35,6 +37,7 @@
         </select>
     </div>
 
+    <!-- DESCRIPCIÓN -->
     <div class="form-group">
         <label for="description">Descripción</label>
         <textarea
@@ -45,6 +48,7 @@
         ><?= esc($offer['description']) ?></textarea>
     </div>
 
+    <!-- PRECIO -->
     <div class="form-group">
         <label for="price">Precio (MXN)</label>
         <input
@@ -58,6 +62,7 @@
         >
     </div>
 
+    <!-- UBICACIÓN -->
     <div class="form-group">
         <label for="location">Ubicación</label>
         <input
@@ -69,6 +74,7 @@
         >
     </div>
 
+    <!-- IMAGEN -->
     <div class="form-group">
         <label for="image_url">Imagen (URL)</label>
         <input
@@ -76,15 +82,18 @@
             name="image_url"
             id="image_url"
             value="<?= esc($offer['image_url']) ?>"
+            placeholder="https://.../imagen.jpg"
         >
     </div>
 
+    <!-- ACCIONES -->
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">
-            Actualizar oferta
+             Actualizar oferta
         </button>
+
         <a href="/local-offers/my-offers" class="btn btn-secondary">
-            Volver
+            ← Volver
         </a>
     </div>
 

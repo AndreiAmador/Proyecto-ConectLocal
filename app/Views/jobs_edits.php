@@ -10,8 +10,13 @@
     </div>
 <?php endif; ?>
 
-<form action="/jobs/update/<?= $job['id'] ?>" method="post" class="card form">
+<form
+    action="/jobs/update/<?= $job['id'] ?>"
+    method="post"
+    class="card form"
+>
 
+    <!-- TÍTULO -->
     <div class="form-group">
         <label for="job_title">Título del trabajo</label>
         <input
@@ -23,6 +28,7 @@
         >
     </div>
 
+    <!-- IMAGEN -->
     <div class="form-group">
         <label for="job_image">Imagen (URL)</label>
         <input
@@ -30,10 +36,11 @@
             name="job_image"
             id="job_image"
             value="<?= esc($job['job_image']) ?>"
-            placeholder="https://.../foto.jpg"
+            placeholder="https://ejemplo.com/imagen.jpg"
         >
     </div>
 
+    <!-- DESCRIPCIÓN -->
     <div class="form-group">
         <label for="description">Descripción</label>
         <textarea
@@ -44,10 +51,12 @@
         ><?= esc($job['description']) ?></textarea>
     </div>
 
+    <!-- ACCIONES -->
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">
-            Actualizar trabajo
+             Actualizar trabajo
         </button>
+
         <a href="/jobs" class="btn btn-secondary">
             ← Volver
         </a>
