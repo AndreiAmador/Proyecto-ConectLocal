@@ -51,7 +51,7 @@ class Auth extends Controller
         session()->set('user_id', $userId);
 
         // Redirigir directamente al formulario de perfil
-        return redirect()->to('/profile/edit')->with('success', 'Registro exitoso. Complete su perfil.');
+        return redirect()->to('/profile/edit');
     }
 
     // Mostrar el formulario de login
@@ -80,18 +80,36 @@ class Auth extends Controller
             if ($profile) {
                 return redirect()->to('/profile');
             } else {
-                return redirect()->to('/profile/edit')->with('info', 'Complete su perfil por primera vez');
+                return redirect()->to('/profile/edit');
             }
         } else {
             return redirect()->to('/auth/login')->with('error', 'Credenciales incorrectas');
         }
     }
 
+    // Mostrar el perfil del usuario
+    public function profile()
+    {
+        if (!session()->get('loggedIn')) {
+            return redirect()->to('/auth/login');
+        }
+
+        $userId = session()->get('user_id');
+        $profileModel = new UserProfileModel();
+        $profile = $profileModel->getProfileByUserId($userId);
+
+        if (!$profile) {
+            return redirect()->to('/profile/edit');
+        }
+
+        return view('profile', ['profile' => $profile]);
+    }
+
     // Mostrar el formulario de edición de perfil
     public function editProfile()
     {
         if (!session()->get('loggedIn')) {
-            return redirect()->to('/auth/login')->with('error', 'Por favor, inicie sesión primero');
+            return redirect()->to('/auth/login');
         }
 
         $userId = session()->get('user_id');
@@ -105,72 +123,53 @@ class Auth extends Controller
     public function saveProfile()
     {
         if (!session()->get('loggedIn')) {
-            return redirect()->to('/auth/login')->with('error', 'Por favor, inicie sesión primero');
+            return redirect()->to('/auth/login');
         }
 
         $userId = session()->get('user_id');
+        $profileModel = new UserProfileModel();
+        
+        // Obtener perfil actual para mantener la foto si no se sube nueva
+        $currentProfile = $profileModel->getProfileByUserId($userId);
+        $currentPhoto = $currentProfile['photo'] ?? '';
+
         $data = [
             'bio' => $this->request->getPost('bio'),
             'phone' => $this->request->getPost('phone'),
             'social_link' => $this->request->getPost('social_link'),
+            'photo' => $currentPhoto // Si no se sube una nueva foto, se mantiene la actual
         ];
 
-        // Manejar la subida de la foto
+        // Manejar subida de foto
         $photoFile = $this->request->getFile('photo');
         if ($photoFile && $photoFile->isValid() && !$photoFile->hasMoved()) {
-            $uploadPath = WRITEPATH . 'uploads/profiles/';
+            // Usar FCPATH para acceder a la carpeta pública 'uploads/profiles/'
+            $uploadPath = FCPATH . 'public/uploads/profiles/';
+            
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 0777, true);
             }
+            
+            // Obtener un nombre aleatorio para la foto
             $newName = $photoFile->getRandomName();
             if ($photoFile->move($uploadPath, $newName)) {
+                // Guardar la ruta de la imagen
                 $data['photo'] = 'uploads/profiles/' . $newName;
             }
         }
 
-        $profileModel = new UserProfileModel();
-        $result = $profileModel->saveProfile($userId, $data);
+        // Guardar el perfil actualizado
+        $profileModel->saveProfile($userId, $data);
 
-        if ($result) {
-            return redirect()->to('/profile')->with('success', 'Perfil guardado exitosamente');
-        } else {
-            return redirect()->to('/profile/edit')->with('error', 'Error al guardar el perfil');
-        }
+        return redirect()->to('/profile');
     }
+public function logout()
+{
+    // Destruir la sesión
+    session()->destroy();
 
-    // Mostrar el perfil del usuario
-    public function profile()
-    {
-        if (!session()->get('loggedIn')) {
-            return redirect()->to('/auth/login')->with('error', 'Por favor, inicie sesión primero');
-        }
+    // Redirigir al usuario a la página de login con un mensaje de éxito
+    return redirect()->to('/auth/login')->with('success', 'Sesión cerrada exitosamente');
+}
 
-        $userId = session()->get('user_id');
-        $profileModel = new UserProfileModel();
-        $profile = $profileModel->getProfileByUserId($userId);
-
-        if (!$profile) {
-            return redirect()->to('/profile/edit')->with('error', 'Complete su perfil primero');
-        }
-
-        // Obtener trabajos y servicios
-        $jobModel = new \App\Models\UserJobModel();
-        $jobs = $jobModel->getJobsByUserId($userId);
-
-        $serviceModel = new \App\Models\ServicePostModel();
-        $services = $serviceModel->getPostsByUser($userId);
-
-        return view('profile', [
-            'profile' => $profile,
-            'jobs' => $jobs,
-            'services' => $services
-        ]);
-    }
-
-    // Cerrar sesión
-    public function logout()
-    {
-        session()->destroy();
-        return redirect()->to('/auth/login')->with('success', 'Sesión cerrada exitosamente');
-    }
 }

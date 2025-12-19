@@ -7,7 +7,8 @@
 <?php endif; ?>
 
 <?php if (!empty($profile['photo'])): ?>
-    <img src="<?= base_url($profile['photo']) ?>" style="max-width: 200px;">
+    <!-- Mostrar la imagen de perfil usando base_url() -->
+    <img src="<?= base_url('public/' . $profile['photo']); ?>" style="max-width: 200px;">
 <?php endif; ?>
 
 <p><strong>Biografía:</strong> <?= esc($profile['bio']) ?></p>
@@ -16,7 +17,6 @@
 
 <p>
     <a href="/profile/edit">Editar perfil</a> 
-    
 </p>
 
 <hr>
@@ -39,3 +39,10 @@
 <h2>Servicios Publicados</h2>
 <p><a href="/services/create">Publicar nuevo servicio</a></p>
 <p><a href="/services/my-posts">Gestionar mis publicaciones</a></p>
+
+<hr>
+
+<!-- Agregar el enlace para cerrar sesión -->
+<p>
+    <a href="<?= site_url('auth/logout') ?>">Cerrar sesión</a>
+</p>

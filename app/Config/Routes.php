@@ -13,7 +13,7 @@ $routes->post('/auth/registerPost', 'Auth::registerPost');
 $routes->get('profile', 'Auth::profile');
 $routes->get('profile/edit', 'Auth::editProfile');
 $routes->post('profile/edit', 'Auth::saveProfile');
-
+$routes->get('auth/logout', 'Auth::logout');
 
 
 // O si prefieres rutas simples (sin /api)
