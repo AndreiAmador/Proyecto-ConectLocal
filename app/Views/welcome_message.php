@@ -1,76 +1,97 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Inicio - Servicios Disponibles</title>
-</head>
-<body>
-    <h1>Servicios Disponibles</h1>
+<?= $this->extend('layouts/main') ?>
 
-    <!-- Mensajes de éxito o error -->
-    <?php if (session()->getFlashdata('success')): ?>
-        <div style="color: green; padding: 10px; background: #d4edda;">
-            <?= session()->getFlashdata('success'); ?>
-        </div>
-    <?php endif; ?>
+<?= $this->section('content') ?>
 
-    <?php if (session()->getFlashdata('error')): ?>
-        <div style="color: red; padding: 10px; background: #f8d7da;">
-            <?= session()->getFlashdata('error'); ?>
-        </div>
-    <?php endif; ?>
+<h1>Servicios Disponibles</h1>
 
-    <!-- Enlaces de acción para usuarios logueados -->
-    <?php if (session()->get('loggedIn')): ?>
-        <p><a href="/services/create">Publicar un nuevo servicio</a></p>
-        <p><a href="/services/my-posts">Ver mis publicaciones</a></p>
-    <?php endif; ?>
+<!-- Acciones si está logueado -->
+<?php if (session()->get('loggedIn')): ?>
+    <div class="actions">
+        <a href="/services/create" class="btn btn-success">Publicar un nuevo servicio</a>
+        <a href="/services/my-posts" class="btn btn-info">Ver mis publicaciones</a>
+    </div>
+<?php endif; ?>
 
-    <!-- Listado de servicios -->
-    <?php if (empty($posts)): ?>
-        <p>No hay servicios publicados aún.</p>
-    <?php else: ?>
+<!-- Listado de servicios -->
+<?php if (empty($posts)): ?>
+    <p>No hay servicios publicados aún.</p>
+<?php else: ?>
+    <div class="cards-grid">
         <?php foreach ($posts as $post): ?>
-            <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 5px;">
+            <div class="card service-card card-modal-trigger">
                 <h3><?= esc($post['title']) ?></h3>
+
                 <p><strong>Categoría:</strong> <?= esc($post['category']) ?></p>
-                <p><strong>Descripción:</strong> <?= nl2br(esc($post['description'])) ?></p>
-                <p><strong>Precio:</strong> $<?= number_format($post['price'], 2) ?> MXN</p>
-                <?php if ($post['image_url']): ?>
-                    <img src="<?= esc($post['image_url']) ?>" alt="<?= esc($post['title']) ?>" style="max-width: 300px;">
+
+                <p><strong>Descripción:</strong><br>
+                    <?= nl2br(esc($post['description'])) ?>
+                </p>
+
+                <p><strong>Precio:</strong>
+                    $<?= number_format($post['price'], 2) ?> MXN
+                </p>
+
+                <?php if (!empty($post['image_url'])): ?>
+                    <img
+                        src="<?= esc($post['image_url']) ?>"
+                        alt="<?= esc($post['title']) ?>"
+                        class="card-image"
+                    >
                 <?php endif; ?>
-                <p><small>Publicado por: <?= esc($post['username'] ?? 'Usuario') ?> | 
-                   <?= date('d/m/Y', strtotime($post['created_at'])) ?></small></p>
+
+                <p class="meta">
+                    Publicado por:
+                    <?= esc($post['username'] ?? 'Usuario') ?> |
+                    <?= date('d/m/Y', strtotime($post['created_at'])) ?>
+                </p>
             </div>
         <?php endforeach; ?>
-    <?php endif; ?>
+    </div> <!-- CIERRE DEL GRID -->
+<?php endif; ?>
 
-    <!-- Enlaces de perfil y cierre de sesión para usuarios logueados -->
-    <?php if (session()->get('loggedIn')): ?>
-        <p><a href="/profile">Mi perfil</a> | <a href="/auth/logout">Cerrar sesión</a></p>
-    <?php else: ?>
-        <p><a href="/auth/login">Iniciar sesión</a> | <a href="/auth/register">Registrarse</a></p>
-    <?php endif; ?>
+<hr>
 
-    <!-- Sección de ofertas locales -->
-    <h2>Ofertas Locales</h2>
-    <?php if (empty($offers)): ?>
-        <p>No hay ofertas locales publicadas aún.</p>
-    <?php else: ?>
+<h2>Ofertas Locales</h2>
+
+<?php if (empty($offers)): ?>
+    <p>No hay ofertas locales publicadas aún.</p>
+<?php else: ?>
+    <div class="cards-grid">
         <?php foreach ($offers as $offer): ?>
-            <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px;">
+            <div class="card offer-card card-modal-trigger">
                 <h3><?= esc($offer['title']) ?></h3>
+
                 <p><strong>Categoría:</strong> <?= esc($offer['category']) ?></p>
-                <p><strong>Descripción:</strong> <?= esc($offer['description']) ?></p>
-                <p><strong>Precio:</strong> $<?= number_format($offer['price'], 2) ?> MXN</p>
+
+                <p><?= esc($offer['description']) ?></p>
+
+                <p><strong>Precio:</strong>
+                    $<?= number_format($offer['price'], 2) ?> MXN
+                </p>
+
                 <p><strong>Ubicación:</strong> <?= esc($offer['location']) ?></p>
-                <?php if ($offer['image_url']): ?>
-                    <img src="<?= esc($offer['image_url']) ?>" style="max-width: 300px;">
+
+                <?php if (!empty($offer['image_url'])): ?>
+                    <img
+                        src="<?= esc($offer['image_url']) ?>"
+                        class="card-image"
+                    >
                 <?php endif; ?>
-                <p><small>Publicado por: <?= esc($offer['username']) ?></small></p>
+
+                <p class="meta">
+                    Publicado por: <?= esc($offer['username']) ?>
+                </p>
             </div>
         <?php endforeach; ?>
-    <?php endif; ?>
+    </div>
+<?php endif; ?>
 
-</body>
-</html>
+<!-- Links finales -->
+<div class="actions">
+<?php if (!session()->get('loggedIn')): ?>
+    <a href="/auth/login">Iniciar sesión</a> |
+    <a href="/auth/register">Registrarse</a>
+<?php endif; ?>
+</div>
+
+<?= $this->endSection() ?>

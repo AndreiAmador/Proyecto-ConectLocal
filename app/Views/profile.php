@@ -1,48 +1,80 @@
-<h1>Mi Perfil</h1>
+<?= $this->extend('layouts/main') ?>
+<?= $this->section('content') ?>
 
-<?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success">
-        <?= session()->getFlashdata('success'); ?>
+<div class="container">
+
+    <div class="card profile-card">
+
+        <h1>Mi Perfil</h1>
+
+        <?php if (session()->getFlashdata('success')): ?>
+            <div class="alert-success">
+                <?= session()->getFlashdata('success'); ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- ===== HEADER PERFIL ===== -->
+        <div class="profile-header">
+
+            <div class="profile-avatar">
+                <?php if (!empty($profile['photo'])): ?>
+                    <img src="<?= base_url('public/' . $profile['photo']) ?>">
+                <?php else: ?>
+                    <img src="<?= base_url('img/avatar-default.png') ?>">
+                <?php endif; ?>
+            </div>
+
+            <div class="profile-info">
+                <h2><?= esc($profile['username'] ?? 'Usuario') ?></h2>
+                <p><?= esc($profile['bio'] ?? 'Sin biografía') ?></p>
+                <p><strong>Tel:</strong> <?= esc($profile['phone'] ?? '—') ?></p>
+
+                <?php if (!empty($profile['social_link'])): ?>
+                    <a href="<?= esc($profile['social_link']) ?>" target="_blank">
+                        <?= esc($profile['social_link']) ?>
+                    </a>
+                <?php endif; ?>
+
+                <br><br>
+                <a href="/profile/edit" class="btn btn-info">Editar perfil</a>
+            </div>
+
+        </div>
+
+        <!-- ===== BLOQUES ===== -->
+
+        <section class="profile-section">
+            <h3>Ofertas Locales</h3>
+            <div class="profile-actions">
+                <a href="/local-offers/create" class="btn btn-primary">Publicar</a>
+                <a href="/local-offers/my-offers" class="btn btn-secondary">Gestionar</a>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <h3>Mi Currículum</h3>
+            <div class="profile-actions">
+                <a href="/jobs/create" class="btn btn-primary">Agregar</a>
+                <a href="/jobs" class="btn btn-secondary">Ver CV</a>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <h3>Servicios</h3>
+            <div class="profile-actions">
+                <a href="/services/create" class="btn btn-primary">Nuevo</a>
+                <a href="/services/my-posts" class="btn btn-secondary">Gestionar</a>
+            </div>
+        </section>
+
+        <hr>
+
+        <a href="<?= site_url('auth/logout') ?>" class="btn btn-error">
+            Cerrar sesión
+        </a>
+
     </div>
-<?php endif; ?>
 
-<?php if (!empty($profile['photo'])): ?>
-    <!-- Mostrar la imagen de perfil usando base_url() -->
-    <img src="<?= base_url('public/' . $profile['photo']); ?>" style="max-width: 200px;">
-<?php endif; ?>
+</div>
 
-<p><strong>Biografía:</strong> <?= esc($profile['bio']) ?></p>
-<p><strong>Teléfono:</strong> <?= esc($profile['phone']) ?></p>
-<p><strong>Enlace social:</strong> <a href="<?= esc($profile['social_link']) ?>"><?= esc($profile['social_link']) ?></a></p>
-
-<p>
-    <a href="/profile/edit">Editar perfil</a> 
-</p>
-
-<hr>
-
-<!-- Sección de Ofertas Locales -->
-<h2>Ofertas Locales</h2>
-<p><a href="/local-offers/create">Publicar nueva oferta local</a></p>
-<p><a href="/local-offers/my-offers">Gestionar mis ofertas</a></p>
-
-<hr>
-
-<!-- Sección de CV/Trabajos -->
-<h2>Mi Currículum</h2>
-<p><a href="/jobs/create">Agregar nuevo trabajo</a></p>
-<p><a href="/jobs">Ver y gestionar mi currículum</a></p>
-
-<hr>
-
-<!-- Sección de Servicios -->
-<h2>Servicios Publicados</h2>
-<p><a href="/services/create">Publicar nuevo servicio</a></p>
-<p><a href="/services/my-posts">Gestionar mis publicaciones</a></p>
-
-<hr>
-
-<!-- Agregar el enlace para cerrar sesión -->
-<p>
-    <a href="<?= site_url('auth/logout') ?>">Cerrar sesión</a>
-</p>
+<?= $this->endSection() ?>

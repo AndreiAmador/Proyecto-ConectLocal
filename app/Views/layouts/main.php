@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title><?= esc($title ?? 'ConectLocal') ?></title>
+
+    <!-- CSS global -->
+    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+</head>
+<body>
+
+<!-- page-loader -->
+<div id="page-loader">
+    <div class="spinner"></div>
+</div>
+
+<canvas id="stars"></canvas>
+
+<header class="header">
+    <div class="container header-content">
+        <h1 class="logo">ConectLocal</h1>
+        <nav class="nav">
+    <a href="/profile" class="btn btn-info">Mi perfil</a>
+    <a href="/auth/logout" class="btn btn-error">Cerrar sesión</a>
+        </nav>
+    </div>
+    <div class="scroll-progress">
+        <span class="scroll-bar"></span>
+    </div>
+</header>
+
+<!-- Progreso -->
+<script>
+    const bar = document.querySelector('.scroll-bar');
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+        if (docHeight <= 0) return;
+
+        const progress = (scrollTop / docHeight) * 100;
+        bar.style.width = progress + '%';
+    });
+</script>
+
+<main class="container content">
+
+    <!-- CONTENEDOR DE ALERTAS -->
+    <div id="alert-container"></div>
+
+    <div class="page-content">
+        <?= $this->renderSection('content') ?>
+    </div>
+
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert alert-success">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('warning')): ?>
+    <div class="alert alert-warning">
+        <?= session()->getFlashdata('warning') ?>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('info')): ?>
+    <div class="alert alert-info">
+        <?= session()->getFlashdata('info') ?>
+    </div>
+<?php endif; ?>
+
+</main>
+
+<footer class="footer">
+
+    <!-- cartas de preuba -->
+ 
+    <p>Desarrollado por:</p>
+    <p>André San Arce</p>
+    <p>Armando Andrei Amador</p>
+    <p>Plataforma para conectar servicios y ofertas locales en tu comunidad.</p>
+    <p>Desarrollado con CodeIgniter 4 • PHP • MySQL</p>
+    
+
+    <p>© 2025 ConectLocal · Proyecto escolar</p>
+</footer>
+
+<!-- JS global -->
+<script src="<?= base_url('js/mouse-trail.js') ?>"></script>
+
+<script src="<?= base_url('js/stars.js') ?>"></script>
+
+<script src="<?= base_url('js/loader.js') ?>"></script>
+
+<script src="<?= base_url('js/alerts.js') ?>"></script>
+
+<button id="backToTop" aria-label="Volver arriba">
+    ⬆
+</button>
+    <script>
+    const backToTop = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
+
+<div id="card-overlay">
+    <div id="card-modal"></div>
+</div>
+
+<script src="<?= base_url('js/modal.js') ?>"></script>
+
+</body>
+</html>
