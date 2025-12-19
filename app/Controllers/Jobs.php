@@ -67,7 +67,7 @@ class Jobs extends Controller
             return redirect()->to('/jobs')->with('error', 'Trabajo no encontrado');
         }
 
-        return view('jobs_edits', ['job' => $job]);
+        return view('jobs_edit', ['job' => $job]);
     }
 
     // Actualizar trabajo (POST desde formulario)
