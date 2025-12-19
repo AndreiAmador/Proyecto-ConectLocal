@@ -4,6 +4,14 @@
 
 <h1>Servicios Disponibles</h1>
 
+<!-- Links finales -->
+<div class="actions">
+    <?php if (!session()->get('loggedIn')): ?>
+    <a href="/auth/login" class="btn btn-info">Iniciar sesión</a>
+    <a href="/auth/register" class="btn btn-warning">Registrarse</a>
+    <?php endif; ?>
+</div>
+
 <!-- Acciones si está logueado -->
 <?php if (session()->get('loggedIn')): ?>
     <div class="actions">
@@ -52,6 +60,8 @@
 <hr>
 
 <h2>Ofertas Locales</h2>
+                <a href="/local-offers/create" class="btn btn-success">Publicar una nuevas ofertas</a>
+                <a href="/local-offers/my-offers" class="btn btn-info">Mirar mis publiaciones de ofertas</a>
 
 <?php if (empty($offers)): ?>
     <p>No hay ofertas locales publicadas aún.</p>
@@ -85,13 +95,5 @@
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
-
-<!-- Links finales -->
-<div class="actions">
-<?php if (!session()->get('loggedIn')): ?>
-    <a href="/auth/login">Iniciar sesión</a> |
-    <a href="/auth/register">Registrarse</a>
-<?php endif; ?>
-</div>
 
 <?= $this->endSection() ?>

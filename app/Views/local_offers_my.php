@@ -1,48 +1,80 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mis Ofertas Locales</title>
-</head>
-<body>
-    <h1>Mis Ofertas Locales</h1>
+<?= $this->extend('layouts/main') ?>
 
-    <?php if (session()->getFlashdata('success')): ?>
-        <div style="color: green; padding: 10px; background: #d4edda;">
-            <?= session()->getFlashdata('success'); ?>
-        </div>
-    <?php endif; ?>
+<?= $this->section('title') ?>
+<title>Mis Ofertas Locales</title>
+<?= $this->endSection() ?>
 
-    <?php if (session()->getFlashdata('error')): ?>
-        <div style="color: red; padding: 10px; background: #f8d7da;">
-            <?= session()->getFlashdata('error'); ?>
-        </div>
-    <?php endif; ?>
+<?= $this->section('content') ?>
 
-    <p><a href="/local-offers/create">Crear nueva oferta</a></p>
+<div class="container">
+    <section class="page-content">
 
-    <?php if (empty($offers)): ?>
-        <p>No has publicado ofertas locales.</p>
-    <?php else: ?>
-        <?php foreach ($offers as $offer): ?>
-            <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px;">
-                <h3><?= esc($offer['title']) ?></h3>
-                <p><strong>Categoría:</strong> <?= esc($offer['category']) ?></p>
-                <p><strong>Descripción:</strong> <?= nl2br(esc($offer['description'])) ?></p>
-                <p><strong>Precio:</strong> $<?= number_format($offer['price'], 2) ?> MXN</p>
-                <p><strong>Ubicación:</strong> <?= esc($offer['location']) ?></p>
-                <?php if ($offer['image_url']): ?>
-                    <img src="<?= esc($offer['image_url']) ?>" alt="<?= esc($offer['title']) ?>" style="max-width: 200px;">
-                <?php endif; ?>
-                <p><small>Publicado: <?= date('d/m/Y', strtotime($offer['created_at'])) ?></small></p>
-                <p>
-                    <a href="/local-offers/edit/<?= $offer['id'] ?>">Editar</a> | 
-                    <a href="/local-offers/delete/<?= $offer['id'] ?>" onclick="return confirm('¿Eliminar esta oferta?')">Eliminar</a>
-                </p>
+        <h1>Mis Ofertas Locales</h1>
+
+        <?php if (session()->getFlashdata('success')): ?>
+            <div class="card" style="border-color:#22c55e; margin-bottom:24px;">
+                <?= session()->getFlashdata('success'); ?>
             </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+        <?php endif; ?>
 
-    <p><a href="/profile">Volver al perfil</a> | <a href="/">Ver todas las ofertas</a></p>
-</body>
-</html>
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="card" style="border-color:#ef4444; margin-bottom:24px;">
+                <?= session()->getFlashdata('error'); ?>
+            </div>
+        <?php endif; ?>
+
+        <div style="margin-bottom:24px;">
+            <a href="/local-offers/create" class="btn btn-success">Crear nueva oferta</a>
+        </div>
+
+        <?php if (empty($offers)): ?>
+            <div class="card">
+                <p>No has publicado ofertas locales.</p>
+            </div>
+        <?php else: ?>
+            <div class="cards-grid">
+                <?php foreach ($offers as $offer): ?>
+                    <div class="card offer-card">
+                        <h3><?= esc($offer['title']) ?></h3>
+
+                        <p><strong>Categoría:</strong> <?= esc($offer['category']) ?></p>
+
+                        <p><strong>Descripción:</strong><br>
+                            <?= nl2br(esc($offer['description'])) ?>
+                        </p>
+
+                        <p><strong>Precio:</strong> $<?= number_format($offer['price'], 2) ?> MXN</p>
+
+                        <p><strong>Ubicación:</strong> <?= esc($offer['location']) ?></p>
+
+                        <?php if (!empty($offer['image_url'])): ?>
+                            <img
+                                src="<?= esc($offer['image_url']) ?>"
+                                alt="<?= esc($offer['title']) ?>"
+                                class="card-image"
+                            >
+                        <?php endif; ?>
+
+                        <p class="meta">
+                            Publicado: <?= date('d/m/Y', strtotime($offer['created_at'])) ?>
+                        </p>
+
+                        <div style="display:flex; gap:12px; margin-top:16px;">
+                            <a href="/local-offers/edit/<?= $offer['id'] ?>" class="btn btn-info">Editar</a>
+                            <a href="/local-offers/delete/<?= $offer['id'] ?>" class="btn btn-error"
+                               onclick="return confirm('¿Eliminar esta oferta?')">Eliminar</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <div style="margin-top:24px;">
+            <a href="/profile" class="btn btn-primary">Volver al perfil</a>
+            <a href="/" class="btn btn-secondary">Ver todas las ofertas</a>
+        </div>
+
+    </section>
+</div>
+
+<?= $this->endSection() ?>

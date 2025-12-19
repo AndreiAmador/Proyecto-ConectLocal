@@ -1,43 +1,69 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Agregar Trabajo</title>
-</head>
-<body>
-    <h1>Agregar Trabajo Realizado</h1>
+<?= $this->extend('layouts/main') ?>
 
-    <?php if (session()->getFlashdata('error')): ?>
-        <div class="alert alert-danger">
-            <?= session()->getFlashdata('error'); ?>
-        </div>
-    <?php endif; ?>
+<?= $this->section('title') ?>
+<title>Agregar Trabajo</title>
+<?= $this->endSection() ?>
 
-    <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success">
-            <?= session()->getFlashdata('success'); ?>
-        </div>
-    <?php endif; ?>
+<?= $this->section('content') ?>
 
-    <form action="/jobs/store" method="post">
-        <div>
-            <label for="job_title">Título del trabajo:</label><br>
-            <input type="text" name="job_title" id="job_title" required>
-        </div>
-        
-        <div>
-            <label for="job_image">Imagen (URL):</label><br>
-            <input type="text" name="job_image" id="job_image" placeholder="https://.../foto.jpg">
-        </div>
-        
-        <div>
-            <label for="description">Descripción:</label><br>
-            <textarea name="description" id="description" rows="4" required></textarea>
-        </div>
-        
-        <button type="submit">Guardar Trabajo</button>
-    </form>
+<div class="container">
+    <section class="page-content">
 
-    <p><a href="/jobs">Volver a la lista de trabajos</a></p>
-</body>
-</html>
+        <h1>Agregar Trabajo Realizado</h1>
+
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="card" style="border-color:#ef4444; margin-bottom:24px; padding:16px;">
+                <?= session()->getFlashdata('error'); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('success')): ?>
+            <div class="card" style="border-color:#22c55e; margin-bottom:24px; padding:16px;">
+                <?= session()->getFlashdata('success'); ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="card" style="padding:24px;">
+            <form action="/jobs/store" method="post">
+
+                <div class="form-group">
+                    <label for="job_title">Título del trabajo</label>
+                    <input
+                        type="text"
+                        name="job_title"
+                        id="job_title"
+                        required
+                        placeholder="Ej: Diseño de página web">
+                </div>
+
+                <div class="form-group">
+                    <label for="job_image">Imagen (URL)</label>
+                    <input
+                        type="text"
+                        name="job_image"
+                        id="job_image"
+                        placeholder="https://.../foto.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <textarea
+                        name="description"
+                        id="description"
+                        rows="4"
+                        required
+                        placeholder="Detalles del trabajo realizado"></textarea>
+                </div>
+
+                <div style="display:flex; gap:16px; margin-top:24px;">
+                    <button type="submit" class="btn btn-success">Guardar Trabajo</button>
+                    <a href="/jobs" class="btn btn-error">Cancelar</a>
+                </div>
+
+            </form>
+        </div>
+
+    </section>
+</div>
+
+<?= $this->endSection() ?>

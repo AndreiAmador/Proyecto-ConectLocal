@@ -87,6 +87,7 @@
     <a href="/" class="btn btn-info">
         Ver todas las publicaciones
     </a>
+    <a href="/" class="btn btn-secondary">Ver todas las ofertas</a>
 </div>
 
 <?= $this->endSection() ?>

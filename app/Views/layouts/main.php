@@ -20,6 +20,7 @@
     <div class="container header-content">
         <h1 class="logo">ConectLocal</h1>
         <nav class="nav">
+    <a href="/" class="btn btn-warning">Inicio</a>
     <a href="/profile" class="btn btn-info">Mi perfil</a>
     <a href="/auth/logout" class="btn btn-error">Cerrar sesión</a>
         </nav>

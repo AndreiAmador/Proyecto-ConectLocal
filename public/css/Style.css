@@ -637,3 +637,50 @@ body::before {
         margin: 0 auto;
     }
 }
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #3b82f6; /* azul tipo btn */
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.custom-file-upload:hover {
+    background-color: #2563eb;
+}
+
+.input-highlight {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-highlight:focus {
+    border-color: #3b82f6; /* azul tipo btn */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+    outline: none;
+}
+
+.social-link-box {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: white;
+    color: #2563eb; /* azul típico de enlace */
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    text-decoration: underline; /* mantiene la apariencia de enlace */
+    font-size: 0.875rem;
+}
+
+.social-link-box:hover {
+    background-color: #f3f4f6; /* gris suave al pasar el mouse */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    color: #1d4ed8; /* azul más intenso al hover */
+}

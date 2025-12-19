@@ -25,19 +25,19 @@
             </div>
 
             <div class="profile-info">
-                <h2><?= esc($profile['username'] ?? 'Usuario') ?></h2>
-                <p><?= esc($profile['bio'] ?? 'Sin biografía') ?></p>
-                <p><strong>Tel:</strong> <?= esc($profile['phone'] ?? '—') ?></p>
+    <h2><?= esc($profile['username'] ?? 'Usuario') ?></h2>
+    <p><?= esc($profile['bio'] ?? 'Sin biografía') ?></p>
+    <p><strong>Tel:</strong> <?= esc($profile['phone'] ?? '—') ?></p>
 
-                <?php if (!empty($profile['social_link'])): ?>
-                    <a href="<?= esc($profile['social_link']) ?>" target="_blank">
-                        <?= esc($profile['social_link']) ?>
-                    </a>
-                <?php endif; ?>
+    <?php if (!empty($profile['social_link'])): ?>
+        <a href="<?= esc($profile['social_link']) ?>" target="_blank" class="social-link-box">
+            <?= esc($profile['social_link']) ?>
+        </a>
+    <?php endif; ?>
 
-                <br><br>
-                <a href="/profile/edit" class="btn btn-info">Editar perfil</a>
-            </div>
+    <br><br>
+    <a href="/profile/edit" class="btn btn-info">Editar perfil</a>
+</div>
 
         </div>
 
