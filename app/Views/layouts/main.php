@@ -19,15 +19,20 @@
 <header class="header">
     <div class="container header-content">
         <h1 class="logo">ConectLocal</h1>
+
         <nav class="nav">
     <a href="/" class="btn btn-warning">Inicio</a>
-    <a href="/profile" class="btn btn-info">Mi perfil</a>
-    <a href="/auth/logout" class="btn btn-error">Cerrar sesión</a>
-        </nav>
-    </div>
-    <div class="scroll-progress">
-        <span class="scroll-bar"></span>
-    </div>
+
+    <?php if (session()->get('loggedIn')): ?>
+        <!-- SOLO si está logueado -->
+        <a href="/profile" class="btn btn-info">Mi perfil</a>
+        <a href="/auth/logout" class="btn btn-error">Cerrar sesión</a>
+    <?php else: ?>
+        <!-- SOLO si NO está logueado -->
+        <a href="/auth/login" class="btn btn-info">Iniciar sesión</a>
+        <a href="/auth/register" class="btn btn-success">Registrarse</a>
+    <?php endif; ?>
+</nav>
 </header>
 
 <!-- Progreso -->
@@ -46,6 +51,9 @@
 </script>
 
 <main class="container content">
+
+
+
 
     <!-- CONTENEDOR DE ALERTAS -->
     <div id="alert-container"></div>

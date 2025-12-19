@@ -2,7 +2,39 @@
 
 <?= $this->section('content') ?>
 
-<h1>Servicios Disponibles</h1>
+
+<section class="home-hero">
+    <h2>Conecta con servicios locales de confianza</h2>
+    <p>
+        ConectLocal es una plataforma diseñada para unir a personas que
+        ofrecen servicios y productos locales con clientes de su misma comunidad,
+        de forma rápida, segura y sencilla.
+    </p>
+
+    <div class="hero-actions">
+        <a href="#ofertas" class="btn btn-warning">Ver ofertas</a>
+<a href="#servicios" class="btn btn-info">Servicios disponibles</a>
+    </div>
+</section>
+
+<section class="home-benefits">
+    <div class="benefit-card">
+        <h3>Cercano a ti</h3>
+        <p>Encuentra servicios y ofertas disponibles en tu zona.</p>
+    </div>
+
+    <div class="benefit-card">
+        <h3>Confiable</h3>
+        <p>Perfiles reales con trabajos publicados y contacto directo.</p>
+    </div>
+
+    <div class="benefit-card">
+        <h3>Rápido</h3>
+        <p>Publica o encuentra servicios sin procesos complicados.</p>
+    </div>
+</section>
+
+<h1 id="servicios">Servicios Disponibles</h1>
 
 <!-- Links finales -->
 <div class="actions">
@@ -59,7 +91,7 @@
 
 <hr>
 
-<h2>Ofertas Locales</h2>
+<h2 id="ofertas">Ofertas Locales</h2>
                 <a href="/local-offers/create" class="btn btn-success">Publicar una nuevas ofertas</a>
                 <a href="/local-offers/my-offers" class="btn btn-info">Mirar mis publiaciones de ofertas</a>
 
