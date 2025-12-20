@@ -38,7 +38,6 @@
         <span class="scroll-bar"></span>
     </div>
 </header>
-</header>
 
 <main class="container content">
 
