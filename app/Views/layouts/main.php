@@ -14,6 +14,7 @@
     <div class="spinner"></div>
 </div>
 
+<!-- Fondo de estrellas -->
 <canvas id="stars"></canvas>
 
 <header class="header">
@@ -21,20 +22,18 @@
         <h1 class="logo">ConectLocal</h1>
 
         <nav class="nav">
-    <a href="/" class="btn btn-warning">Inicio</a>
+            <a href="/" class="btn btn-warning">Inicio</a>
 
-    <?php if (session()->get('loggedIn')): ?>
-        <!-- SOLO si está logueado -->
-        <a href="/profile" class="btn btn-info">Mi perfil</a>
-        <a href="/auth/logout" class="btn btn-error">Cerrar sesión</a>
-    <?php else: ?>
-        <!-- SOLO si NO está logueado -->
-        <a href="/auth/login" class="btn btn-info">Iniciar sesión</a>
-        <a href="/auth/register" class="btn btn-success">Registrarse</a>
-    <?php endif; ?>
-</nav>
+            <?php if (session()->get('loggedIn')): ?>
+                <a href="/profile" class="btn btn-info">Mi perfil</a>
+                <a href="/auth/logout" class="btn btn-error">Cerrar sesión</a>
+            <?php else: ?>
+                <a href="/auth/login" class="btn btn-info">Iniciar sesión</a>
+                <a href="/auth/register" class="btn btn-success">Registrarse</a>
+            <?php endif; ?>
+        </nav>
+    </div>
 </header>
-
 <!-- Progreso -->
 <script>
     const bar = document.querySelector('.scroll-bar');
@@ -52,9 +51,6 @@
 
 <main class="container content">
 
-
-
-
     <!-- CONTENEDOR DE ALERTAS -->
     <div id="alert-container"></div>
 
@@ -62,77 +58,68 @@
         <?= $this->renderSection('content') ?>
     </div>
 
-<?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success">
-        <?= session()->getFlashdata('success') ?>
-    </div>
-<?php endif; ?>
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
 
-<?php if (session()->getFlashdata('error')): ?>
-    <div class="alert alert-danger">
-        <?= session()->getFlashdata('error') ?>
-    </div>
-<?php endif; ?>
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
 
-<?php if (session()->getFlashdata('warning')): ?>
-    <div class="alert alert-warning">
-        <?= session()->getFlashdata('warning') ?>
-    </div>
-<?php endif; ?>
+    <?php if (session()->getFlashdata('warning')): ?>
+        <div class="alert alert-warning">
+            <?= session()->getFlashdata('warning') ?>
+        </div>
+    <?php endif; ?>
 
-<?php if (session()->getFlashdata('info')): ?>
-    <div class="alert alert-info">
-        <?= session()->getFlashdata('info') ?>
-    </div>
-<?php endif; ?>
+    <?php if (session()->getFlashdata('info')): ?>
+        <div class="alert alert-info">
+            <?= session()->getFlashdata('info') ?>
+        </div>
+    <?php endif; ?>
 
 </main>
 
 <footer class="footer">
-
     <!-- cartas de preuba -->
- 
     <p>Desarrollado por:</p>
     <p>André San Arce</p>
     <p>Armando Andrei Amador</p>
     <p>Plataforma para conectar servicios y ofertas locales en tu comunidad.</p>
     <p>Desarrollado con CodeIgniter 4 • PHP • MySQL</p>
-    
-
     <p>© 2025 ConectLocal · Proyecto escolar</p>
 </footer>
 
-<!-- JS global -->
+<!-- BOTÓN VOLVER ARRIBA -->
+<button id="backToTop" aria-label="Volver arriba">⬆</button>
+
+<!-- JS GLOBAL (ORDEN IMPORTANTE) -->
 <script src="<?= base_url('js/mouse-trail.js') ?>"></script>
-
 <script src="<?= base_url('js/stars.js') ?>"></script>
-
 <script src="<?= base_url('js/loader.js') ?>"></script>
-
 <script src="<?= base_url('js/alerts.js') ?>"></script>
+<script src="<?= base_url('js/backToTop-secret.js') ?>"></script>
+<script src="<?= base_url('js/modal.js') ?>"></script>
 
-<button id="backToTop" aria-label="Volver arriba">
-    ⬆
-</button>
-    <script>
-    const backToTop = document.getElementById('backToTop');
+<!-- JS Back To Top (solo scroll y visibilidad) -->
+<script>
+const backToTop = document.getElementById('backToTop');
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTop.classList.add('show');
-        } else {
-            backToTop.classList.remove('show');
-        }
+window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 300);
+});
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
-
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
+});
 </script>
-
 <div id="card-overlay">
     <div id="card-modal"></div>
 </div>

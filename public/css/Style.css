@@ -745,3 +745,8 @@ body::before {
 html {
     scroll-behavior: smooth;
 }
+
+#servicios,
+#ofertas {
+    scroll-margin-top: 100px; /* altura del header + un poco extra */
+}
