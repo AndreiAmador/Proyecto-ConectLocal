@@ -33,21 +33,12 @@
             <?php endif; ?>
         </nav>
     </div>
+    <!-- BARRA DE PROGRESO -->
+    <div class="scroll-progress">
+        <span class="scroll-bar"></span>
+    </div>
 </header>
-<!-- Progreso -->
-<script>
-    const bar = document.querySelector('.scroll-bar');
-
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-        if (docHeight <= 0) return;
-
-        const progress = (scrollTop / docHeight) * 100;
-        bar.style.width = progress + '%';
-    });
-</script>
+</header>
 
 <main class="container content">
 
@@ -125,6 +116,21 @@ backToTop.addEventListener('click', () => {
 </div>
 
 <script src="<?= base_url('js/modal.js') ?>"></script>
+
+<!-- Progreso -->
+<script>
+    const bar = document.querySelector('.scroll-bar');
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+        if (docHeight <= 0) return;
+
+        const progress = (scrollTop / docHeight) * 100;
+        bar.style.width = progress + '%';
+    });
+</script>
 
 </body>
 </html>
